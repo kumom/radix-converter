@@ -1,0 +1,9 @@
+.Calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+.Calculator *:focus {
+  outline: 0;
+}

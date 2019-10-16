@@ -1,0 +1,26 @@
+@mixin for-all-vendor($property, $value) {
+  -webkit-#{$property}: $value;
+  -ms-#{$property}: $value;
+  #{$property}: $value;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  @include for-all-vendor(box-sizing, border-box);
+}
+
+.App {
+  display: grid;
+  grid-template: 1fr/ 1fr;
+  text-align: center;
+  height: 100vh;
+  font-family: "Montserrat", sans-serif;
+}
+
+.header {
+  background-color: #1f2125;
+  font-size: calc(10px + 3vmin);
+  color: rgb(238, 236, 236);
+  padding: 3vmin;
+}
