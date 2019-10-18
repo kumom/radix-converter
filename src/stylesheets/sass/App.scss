@@ -13,8 +13,7 @@
 .App {
   display: grid;
   grid-template: 1fr/ 1fr;
-  text-align: center;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Montserrat", sans-serif;
 }
 

@@ -1,0 +1,25 @@
+.Converter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3vmin;
+
+  *:focus {
+    outline: 0;
+  }
+
+  input {
+    all: unset;
+  }
+}
+
+.RadixNumber {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+
+  input {
+    text-align: center;
+  }
+}

@@ -1,0 +1,19 @@
+.Converter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3vmin; }
+  .Converter *:focus {
+    outline: 0; }
+  .Converter input {
+    all: unset; }
+
+.RadixNumber {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start; }
+  .RadixNumber input {
+    text-align: center; }
+
+/*# sourceMappingURL=Converter.css.map */
