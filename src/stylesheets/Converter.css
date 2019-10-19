@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 3vmin; }
   .Converter *:focus {
     outline: 0; }
@@ -11,9 +11,8 @@
 
 .RadixNumber {
   display: flex;
-  align-items: baseline;
-  justify-content: flex-start; }
-  .RadixNumber input {
-    text-align: center; }
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
 
 /*# sourceMappingURL=Converter.css.map */

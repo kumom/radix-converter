@@ -1,5 +1,9 @@
 import React from "react";
-import { isValidNumber, convert2all } from "../utils/utils";
+import {
+  isValidNumber,
+  convert2all,
+  convertDecimalFraction
+} from "../utils/utils";
 import { saveCaret, restoreCaret } from "../utils/caretPositioning";
 import "../stylesheets/Converter.css";
 
@@ -8,11 +12,11 @@ class Converter extends React.Component {
     super(props);
     this.state = {
       // radixValues[i] stores the representation of value in radix i
-      radixValues: convert2all("1024", 10),
+      radixValues: convert2all("1024", 10, 10),
+      // how many digits would be calculated for the fractional part
+      precision: 10,
       // how many radixes are shown
-      numRows: 4,
-      // the last radix in the rows of numbers
-      lastRadix: 16
+      numRows: 4
     };
   }
 
@@ -27,7 +31,11 @@ class Converter extends React.Component {
       saveCaret(target);
       this.setState(
         {
-          radixValues: convert2all(input.replace(/\s/g, ""), radix)
+          radixValues: convert2all(
+            input.replace(/\s/g, ""),
+            radix,
+            this.state.precision
+          )
         },
         () => {
           restoreCaret(target);
@@ -43,16 +51,19 @@ class Converter extends React.Component {
 
     return (
       <div className="RadixNumber" style={{ fontSize: numFontSize + "vh" }}>
-        <div>=</div>
-        <span
-          contentEditable={true}
-          suppressContentEditableWarning="true"
-          onInput={event => this.handleChange(event, radix)}
-          onClick={event => saveCaret(event.target)}
-        >
-          {this.state.radixValues[radix]}
-        </span>
-        <sub style={{ fontSize: radixFontSize + "vh" }}>{radix}</sub>
+        <div>{radix === 2 ? "\n" : "="}</div>
+        <div>
+          <span
+            contentEditable={true}
+            suppressContentEditableWarning="true"
+            onInput={event => this.handleChange(event, radix)}
+            onClick={event => saveCaret(event.target)}
+            spellCheck={false}
+          >
+            {this.state.radixValues[radix]}
+          </span>
+          <sub style={{ fontSize: radixFontSize + "vh" }}>{radix}</sub>
+        </div>
       </div>
     );
   };
