@@ -1,18 +1,5 @@
 import JSBI from "jsbi";
 
-let digit2num = b => {
-  let digit = b.toLowerCase();
-  if (b > "9") {
-    digit = 10 + b.charCodeAt(0) - "a".charCodeAt(0);
-  }
-  return digit;
-};
-
-let num2digit = x => {
-  if (x <= 9) return x;
-  else return String.fromCharCode("a".charCodeAt(0) + x - 10);
-};
-
 export function isValidNumber(str, radix) {
   // precondition: 2 <= radix <= 36
   let validDigits = `0-${Math.min(9, radix - 1)}`,
@@ -21,68 +8,39 @@ export function isValidNumber(str, radix) {
     let biggestCharCode = String.fromCharCode("a".charCodeAt(0) + radix - 11);
     let validChars = `a-${biggestCharCode}`;
     valid = new RegExp(
-      `^-?[${validDigits}${validChars}]*\\.?[${validDigits}${validChars}]+$`,
+      `^-?[${validDigits}${validChars}]+\\.?[${validDigits}${validChars}]*$`,
       "ig"
     );
   } else {
-    valid = new RegExp(`^-?[${validDigits}]*\\.?[${validDigits}]+$`, "ig");
+    valid = new RegExp(`^-?[${validDigits}]+\\.?[${validDigits}]*$`, "ig");
   }
   return valid.test(str);
 }
 
-export function convert2all(valueString, fromRadix, precision) {
-  let [integralPart, fractionPart] = valueString.split(".");
+// input: [0-9A-Za-z]
+// output: 0-35
+let digit2num = d => {
+  if (d > "9") {
+    d = d.toLowerCase();
+    return 10 + d.charCodeAt(0) - "a".charCodeAt(0);
+  } else {
+    return Number(d);
+  }
+};
 
-  let integrals = convertIntegral(integralPart, fromRadix);
-  let fractions = convertFraction(fractionPart, fromRadix, precision);
-  let numbers = Array(37)
-    .fill(null)
-    .map((_, index) => {
-      if (index === 0 || index === 1) return "NaN";
-      else {
-        if (fractions) return integrals[index] + "." + fractions[index];
-        else return integrals[index];
-      }
-    });
+// input: 0-35
+// output: [0-9a-z]
+let num2digit = x => {
+  if (x <= 9) return `${x}`;
+  else return String.fromCharCode("a".charCodeAt(0) + x - 10);
+};
 
-  return numbers;
-}
-
-export function convertIntegral(valueString, fromRadix) {
-  // precondition: valueString is a valid representation of the number in fromRadix
-  let valueInDecimal = convert2decimal(valueString, fromRadix);
-
-  let results = Array(37)
-    .fill(null)
-    .map((_, index) => {
-      if (index === fromRadix) return valueString;
-      else if (index === 0 || index === 1) return "NaN";
-      else return valueInDecimal.toString(index);
-    });
-
-  return results;
-}
-
-export function convertFraction(valueString, fromRadix, precision) {
-  if (!valueString) return null;
-
-  let decimal = convertToDecimalFraction(valueString, fromRadix, precision);
-
-  let results = Array(37)
-    .fill(null)
-    .map((_, index) => {
-      if (index === fromRadix) return valueString;
-      else if (index === 0 || index === 1) return "NaN";
-      else return convertFromDecimalFraction(decimal, index, precision);
-    });
-
-  return results;
-}
-
+// input: string representation of an integer in radix, where 2<=radix<=36
+// output: string representation of the input in decimal
 function convert2decimal(valueString, fromRadix) {
-  // precondition: valueString is an integer
   if (fromRadix === 10) return JSBI.BigInt(valueString);
-  let valueInDecimal = JSBI.BigInt(0),
+
+  let result = JSBI.BigInt(0),
     negative = false;
   [...valueString].forEach((c, index) => {
     if (c === "-") {
@@ -97,33 +55,83 @@ function convert2decimal(valueString, fromRadix) {
         JSBI.BigInt(valueString.length - index - 1)
       )
     );
-    valueInDecimal = JSBI.add(valueInDecimal, x);
+    result = JSBI.add(result, x);
   });
 
-  if (negative) valueInDecimal = JSBI.unaryMinus(valueInDecimal);
+  result = negative ? JSBI.unaryMinus(result) : result;
 
-  return valueInDecimal;
+  return result.toString();
 }
 
+export function convert2all(valueString, fromRadix, precision) {
+  let [integralPart, fractionPart] = valueString.split(".");
+
+  let integrals = convertIntegral(integralPart, fromRadix);
+  let fractions = fractionPart
+    ? convertFraction(fractionPart, fromRadix, precision)
+    : null;
+  let numbers = Array(37)
+    .fill(null)
+    .map((_, index) => {
+      if (index === 0 || index === 1) return "NaN";
+      else {
+        if (fractions) return integrals[index] + "." + fractions[index];
+        else return integrals[index];
+      }
+    });
+
+  return numbers;
+}
+
+function convertIntegral(valueString, fromRadix) {
+  // precondition: valueString is a valid representation of the number in fromRadix
+  let valueInDecimal = convert2decimal(valueString, fromRadix);
+
+  let results = Array(37)
+    .fill(null)
+    .map((_, index) => {
+      if (index === fromRadix) return valueString;
+      else if (index === 0 || index === 1) return "NaN";
+      else return valueInDecimal.toString(index);
+    });
+
+  return results;
+}
+
+function convertFraction(valueString, fromRadix, precision = 5) {
+  let decimal = convertToDecimalFraction(valueString, fromRadix, precision);
+
+  let results = Array(37)
+    .fill(null)
+    .map((_, index) => {
+      if (index === fromRadix) return valueString;
+      else if (index === 0 || index === 1) return "NaN";
+      else return convertFromDecimalFraction(decimal, index, precision);
+    });
+
+  return results;
+}
+
+// input: valueString is of form "xxxx" originated from a fractional 0.xxxx
+// output: string representation of input in decimal, with "0." stripped off
 function convertToDecimalFraction(valueString, fromRadix, precision) {
-  // precondition: valueString is of form "xxxx" originated from a fractional 0.xxxx
   if (fromRadix === 10) return JSBI.BigInt(valueString);
   else {
-    let next = JSBI.multiply(
-        convert2decimal(valueString, fromRadix),
+    let dividend = JSBI.multiply(
+        JSBI.BigInt(convert2decimal(valueString, fromRadix)),
         JSBI.BigInt(10)
       ),
-      toDivide = JSBI.exponentiate(
+      divisor = JSBI.exponentiate(
         JSBI.BigInt(fromRadix),
         JSBI.BigInt(valueString.length)
       );
-    let result = JSBI.divide(next, toDivide).toString(),
-      remainder = JSBI.remainder(next, toDivide).toString();
+    let result = JSBI.divide(dividend, divisor).toString(),
+      remainder = JSBI.remainder(dividend, divisor);
 
-    while (/[^0]/g.test(remainder) && result.length < precision) {
-      next = JSBI.multiply(JSBI.BigInt(remainder), JSBI.BigInt(10));
-      result += JSBI.divide(next, toDivide).toString();
-      remainder = JSBI.remainder(next, toDivide).toString();
+    while (/[^0]/g.test(remainder.toString()) && result.length < precision) {
+      dividend = JSBI.multiply(remainder, JSBI.BigInt(10));
+      result += JSBI.divide(dividend, divisor).toString();
+      remainder = JSBI.remainder(dividend, divisor);
     }
 
     return result;
@@ -131,16 +139,16 @@ function convertToDecimalFraction(valueString, fromRadix, precision) {
 }
 
 function convertFromDecimalFraction(valueString, toRadix, precison) {
-  let result = "",
-    radixInDecimal = JSBI.BigInt(digit2num(`${toRadix}`));
-  let next = valueString;
+  let result = "";
+  let multiplier = JSBI.BigInt(digit2num(`${toRadix}`)),
+    multiplicand = JSBI.BigInt(valueString);
 
-  while (/[^0]/g.test(next) && result.length < precison) {
-    let numDigits = next.length;
-    let x = JSBI.multiply(JSBI.BigInt(next), radixInDecimal).toString();
-    let current = x.slice(0, -numDigits);
-    next = x.slice(-numDigits);
-    result += num2digit(Number(current));
+  while (/[^0]/g.test(multiplicand) && result.length < precison) {
+    let offset = multiplicand.toString().length;
+    let x = JSBI.multiply(multiplicand, multiplier).toString();
+    let nextDigit = x.slice(0, x.length - offset);
+    result += num2digit(Number(nextDigit));
+    multiplicand = JSBI.BigInt(x.slice(x.length - offset));
   }
 
   return result;

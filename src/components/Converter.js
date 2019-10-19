@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  isValidNumber,
-  convert2all,
-  convertDecimalFraction
-} from "../utils/utils";
+import { isValidNumber, convert2all } from "../utils/utils";
 import { saveCaret, restoreCaret } from "../utils/caretPositioning";
 import "../stylesheets/Converter.css";
 
