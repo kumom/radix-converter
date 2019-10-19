@@ -89,7 +89,6 @@ function convertIntegral(valueString, fromRadix) {
 
   [...results.keys()].forEach(radix => {
     if (radix === fromRadix) {
-      console.log("here");
       results[radix] = valueString;
     } else if (radix === 0 || radix === 1) results[radix] = "NaN";
     else results[radix] = valueInDecimal.toString(radix);
