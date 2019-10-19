@@ -36,7 +36,7 @@ let num2digit = x => {
 };
 
 // input: string representation of an integer in radix, where 2<=radix<=36
-// output: string representation of the input in decimal
+// output: BigInt of the input in decimal
 function convert2decimal(valueString, fromRadix) {
   if (fromRadix === 10) return JSBI.BigInt(valueString);
 
@@ -58,9 +58,7 @@ function convert2decimal(valueString, fromRadix) {
     result = JSBI.add(result, x);
   });
 
-  result = negative ? JSBI.unaryMinus(result) : result;
-
-  return result.toString();
+  return negative ? JSBI.unaryMinus(result) : result;
 }
 
 export function convert2all(valueString, fromRadix, precision) {
@@ -87,13 +85,15 @@ function convertIntegral(valueString, fromRadix) {
   // precondition: valueString is a valid representation of the number in fromRadix
   let valueInDecimal = convert2decimal(valueString, fromRadix);
 
-  let results = Array(37)
-    .fill(null)
-    .map((_, index) => {
-      if (index === fromRadix) return valueString;
-      else if (index === 0 || index === 1) return "NaN";
-      else return valueInDecimal.toString(index);
-    });
+  let results = Array(37).fill(null);
+
+  [...results.keys()].forEach(radix => {
+    if (radix === fromRadix) {
+      console.log("here");
+      results[radix] = valueString;
+    } else if (radix === 0 || radix === 1) results[radix] = "NaN";
+    else results[radix] = valueInDecimal.toString(radix);
+  });
 
   return results;
 }
@@ -118,7 +118,7 @@ function convertToDecimalFraction(valueString, fromRadix, precision) {
   if (fromRadix === 10) return JSBI.BigInt(valueString);
   else {
     let dividend = JSBI.multiply(
-        JSBI.BigInt(convert2decimal(valueString, fromRadix)),
+        convert2decimal(valueString, fromRadix),
         JSBI.BigInt(10)
       ),
       divisor = JSBI.exponentiate(
