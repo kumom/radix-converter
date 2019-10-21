@@ -20,12 +20,9 @@ export function restoreCaret(target) {
   if (textNode) {
     restoredRange.setStart(
       textNode,
-      Math.min(target.startOffset, textNode.length - 1)
+      Math.min(target.startOffset, textNode.length)
     );
-    restoredRange.setEnd(
-      textNode,
-      Math.min(target.endOffset, textNode.length - 1)
-    );
+    restoredRange.setEnd(textNode, Math.min(target.endOffset, textNode.length));
     sel.removeAllRanges();
     sel.addRange(restoredRange);
   }
