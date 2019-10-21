@@ -17,11 +17,16 @@ export function restoreCaret(target) {
   let sel = window.getSelection(),
     restoredRange = document.createRange(),
     textNode = target.firstChild;
-  restoredRange.setStart(textNode, target.startOffset);
-  restoredRange.setEnd(
-    textNode,
-    Math.min(target.endOffset, textNode.length - 1)
-  );
-  sel.removeAllRanges();
-  sel.addRange(restoredRange);
+  if (textNode) {
+    restoredRange.setStart(
+      textNode,
+      Math.min(target.startOffset, textNode.length - 1)
+    );
+    restoredRange.setEnd(
+      textNode,
+      Math.min(target.endOffset, textNode.length - 1)
+    );
+    sel.removeAllRanges();
+    sel.addRange(restoredRange);
+  }
 }

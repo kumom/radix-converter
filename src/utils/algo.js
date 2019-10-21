@@ -5,13 +5,13 @@ export function isValidNumber(str, radix) {
   // for integers ^[1-9][0-9]*$
 
   // we will manually add "0" later in the regex
-  let validChars = `1-${Math.min(9, radix - 1)}`;
+  let validChars = `0-${Math.min(9, radix - 1)}`;
   if (radix > 10) {
     validChars += `a-${String.fromCharCode("a".charCodeAt(0) + radix - 11)}`;
   }
 
   let valid = new RegExp(
-    `^-?0?\\.[0${validChars}]+$|^-?[${validChars}]\\.?[0${validChars}]*$`,
+    `^-?[${validChars}]+\\.?[${validChars}]*$|^-?\\.[${validChars}]+$`,
     "ig"
   );
   return valid.test(str);
