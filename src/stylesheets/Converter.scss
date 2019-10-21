@@ -4,19 +4,17 @@
   justify-content: center;
   align-items: center;
   padding: 3vmin;
-
-  *:focus {
-    outline: 0;
-  }
-
-  input {
-    all: unset;
-  }
 }
 
-.RadixNumber {
+.radix-number-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  font-size: 5vmin;
+  .radix-number:focus {
+    outline: 0;
+    filter: invert(0.5);
+  }
 }

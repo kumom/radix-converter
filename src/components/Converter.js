@@ -2,6 +2,7 @@ import React from "react";
 import { isValidNumber, convert2all } from "../utils/algo";
 import { saveCaret, restoreCaret } from "../utils/caretPositioning";
 import "../stylesheets/Converter.css";
+import { inheritInnerComments } from "@babel/types";
 
 class Converter extends React.Component {
   constructor(props) {
@@ -15,20 +16,21 @@ class Converter extends React.Component {
       // how many digits would be calculated for the fractional part
       precision: 10,
       // how many radixes are shown
-      numRows: 4
+      numRows: 35,
+      // radix in the last row
+      lastRadix: 36
     };
   }
 
   handleChange = (event, radix) => {
-    let target = event.target,
-      input = target.textContent,
-      ref = this.numRefs[radix];
+    let target = this.numRefs[radix].current,
+      input = target.textContent;
 
     if (!isValidNumber(input, radix)) {
       target.textContent = this.state.radixValues[radix];
-      restoreCaret(ref.current);
+      restoreCaret(target);
     } else {
-      saveCaret(event, ref.current);
+      saveCaret(event, target);
       this.setState(
         {
           radixValues: convert2all(
@@ -38,49 +40,50 @@ class Converter extends React.Component {
           )
         },
         () => {
-          restoreCaret(ref.current);
+          restoreCaret(target);
         }
       );
     }
   };
 
   renderNumber = radix => {
-    // we should maybe set an upper bound for the font size to avoid overflow
-    const numFontSize = 3 + 10 / this.state.numRows + radix / 3;
-    const radixFontSize = numFontSize / 2;
     const ref = this.numRefs[radix];
 
     return (
-      <div className="RadixNumber" style={{ fontSize: numFontSize + "vh" }}>
-        <div>{radix === 2 ? "\n" : "="}</div>
-        <div>
-          <span
-            ref={ref}
-            contentEditable={true}
-            suppressContentEditableWarning="true"
-            onInput={event => this.handleChange(event, radix)}
-            onClick={event => saveCaret(event, ref.current)}
-            onKeyDown={event => saveCaret(event, ref.current)}
-            tabIndex={1}
-            spellCheck={false}
-          >
-            {this.state.radixValues[radix]}
-          </span>
-          <sub style={{ fontSize: radixFontSize + "vh" }}>{radix}</sub>
-        </div>
-      </div>
+      <>
+        <span
+          className="radix-number"
+          ref={ref}
+          contentEditable={true}
+          suppressContentEditableWarning="true"
+          onInput={event => this.handleChange(event, radix)}
+          onClick={event => saveCaret(event, ref.current)}
+          onKeyDown={event => saveCaret(event, ref.current)}
+          tabIndex={1}
+          spellCheck={false}
+        >
+          {this.state.radixValues[radix]}
+        </span>
+        <sub style={{ fontSize: "50%" }}>{radix}</sub>
+      </>
     );
   };
 
   render() {
-    return (
-      <div className="Converter">
-        {this.renderNumber(2)}
-        {this.renderNumber(8)}
-        {this.renderNumber(10)}
-        {this.renderNumber(16)}
-      </div>
-    );
+    let allNumbers = [];
+    [...this.numRefs.keys()].forEach(radix => {
+      if (radix === 0 || radix === 1) return;
+      allNumbers.push(
+        <div className="radix-number-container">
+          <div className="radix-number">{this.renderNumber(radix)}</div>
+          <div style={{ lineHeight: "80%" }}>
+            {radix === this.state.lastRadix ? "\n" : "="}
+          </div>
+        </div>
+      );
+    });
+
+    return <div className="Converter">{allNumbers}</div>;
   }
 }
 

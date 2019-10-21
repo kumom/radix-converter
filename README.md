@@ -7,9 +7,10 @@ This small tool converts numbers (integers or fractionals) from **arbitrary base
 ## To Do
 
 - [ ] Testing
-- [ ] Some buggy behaviors for saving/storing caret
+- [x] Some buggy behaviors for saving/storing caret
 - [ ] Display other radixes
 - [ ] Allow to set precision
+- [ ] Modal window
 
 ## References
 

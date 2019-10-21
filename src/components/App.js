@@ -1,5 +1,7 @@
 import React from "react";
 import Converter from "./Converter";
+import Header from "./Header";
+import Setting from "./Setting";
 import "../stylesheets/App.css";
 
 function App() {
@@ -9,7 +11,12 @@ function App() {
         href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
         rel="stylesheet"
       ></link>
-      {/* <header className="header">Radix Calculator</header> */}
+      <link
+        href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap"
+        rel="stylesheet"
+      ></link>
+      <Setting></Setting>
+      <Header></Header>
       <Converter />
     </div>
   );

@@ -3,18 +3,26 @@
   padding: 0;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  box-sizing: border-box; }
-
+  box-sizing: border-box;
+}
 .App {
-  display: grid;
-  grid-template: 1fr/ 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
-  font-family: "Montserrat", sans-serif; }
-
-.header {
+  font-family: "Montserrat", sans-serif;
+}
+.Header {
+  width: 100%;
   background-color: #1f2125;
   font-size: calc(10px + 3vmin);
   color: #eeecec;
-  padding: 3vmin; }
-
-/*# sourceMappingURL=App.css.map */
+  padding: 1vmin;
+  text-align: center;
+  font-size: 6vh;
+  font-family: "Architects Daughter", cursive;
+}
+.Setting {
+  position: fixed;
+  margin-right: 0;
+}
