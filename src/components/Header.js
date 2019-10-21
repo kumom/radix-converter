@@ -1,7 +1,7 @@
 import React from "react";
 
 function Header() {
-  return <div className="Header">Radix Calculator</div>;
+  return <div className="Header">Radix Converter</div>;
 }
 
 export default Header;
