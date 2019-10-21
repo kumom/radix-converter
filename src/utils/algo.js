@@ -17,6 +17,11 @@ export function isValidNumber(str, radix) {
   return valid.test(str);
 }
 
+/*** Conversion Algorithm ***/
+/* All functions named `^convert\w+` except "convert2all" 
+   accept input matching [1-9a-z]+. Negative numbers and fractions are 
+   in the end handled by "convert2all" */
+
 // input: [0-9A-Za-z]
 // output: 0-35
 let digit2num = d => {
@@ -35,18 +40,11 @@ let num2digit = x => {
   else return String.fromCharCode("a".charCodeAt(0) + x - 10);
 };
 
-// input: string representation of an integer in radix, where 2<=radix<=36
-// output: BigInt of the input in decimal
 function convert2decimal(valueString, fromRadix) {
   if (fromRadix === 10) return JSBI.BigInt(valueString);
 
-  let result = JSBI.BigInt(0),
-    negative = false;
+  let result = JSBI.BigInt(0);
   [...valueString].forEach((c, index) => {
-    if (c === "-") {
-      negative = !negative;
-      return;
-    }
     let digit = digit2num(c);
     let x = JSBI.multiply(
       JSBI.BigInt(digit),
@@ -58,31 +56,10 @@ function convert2decimal(valueString, fromRadix) {
     result = JSBI.add(result, x);
   });
 
-  return negative ? JSBI.unaryMinus(result) : result;
-}
-
-export function convert2all(valueString, fromRadix, precision) {
-  let [integralPart, fractionPart] = valueString.split(".");
-
-  let integrals = convertIntegral(integralPart, fromRadix);
-  let fractions = fractionPart
-    ? convertFraction(fractionPart, fromRadix, precision)
-    : null;
-  let numbers = Array(37)
-    .fill(null)
-    .map((_, index) => {
-      if (index === 0 || index === 1) return "NaN";
-      else {
-        if (fractions) return integrals[index] + "." + fractions[index];
-        else return integrals[index];
-      }
-    });
-
-  return numbers;
+  return result;
 }
 
 function convertIntegral(valueString, fromRadix) {
-  // precondition: valueString is a valid representation of the number in fromRadix
   let valueInDecimal = convert2decimal(valueString, fromRadix);
 
   let results = Array(37).fill(null);
@@ -111,8 +88,6 @@ function convertFraction(valueString, fromRadix, precision = 5) {
   return results;
 }
 
-// input: valueString is of form "xxxx" originated from a fractional 0.xxxx
-// output: string representation of input in decimal, with "0." stripped off
 function convertToDecimalFraction(valueString, fromRadix, precision) {
   if (fromRadix === 10) return JSBI.BigInt(valueString);
   else {
@@ -151,4 +126,28 @@ function convertFromDecimalFraction(valueString, toRadix, precison) {
   }
 
   return result;
+}
+
+export function convert2all(valueString, fromRadix, precision) {
+  let negative = valueString[0] === "-";
+  valueString = negative ? valueString.slice(1) : valueString;
+
+  let [integralPart, fractionPart] = valueString.split(".");
+
+  let integrals = convertIntegral(integralPart, fromRadix);
+  let fractions = fractionPart
+    ? convertFraction(fractionPart, fromRadix, precision)
+    : null;
+  let sign = negative ? "-" : "";
+  let numbers = Array(37)
+    .fill(null)
+    .map((_, index) => {
+      if (index === 0 || index === 1) return "NaN";
+      else {
+        if (fractions) return sign + integrals[index] + "." + fractions[index];
+        else return sign + integrals[index];
+      }
+    });
+
+  return numbers;
 }
