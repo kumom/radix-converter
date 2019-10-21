@@ -2,18 +2,18 @@ import JSBI from "jsbi";
 
 export function isValidNumber(str, radix) {
   // precondition: 2 <= radix <= 36
-  let validDigits = `0-${Math.min(9, radix - 1)}`,
-    valid = null;
+  // for integers ^[1-9][0-9]*$
+
+  // we will manually add "0" later in the regex
+  let validChars = `1-${Math.min(9, radix - 1)}`;
   if (radix > 10) {
-    let biggestCharCode = String.fromCharCode("a".charCodeAt(0) + radix - 11);
-    let validChars = `a-${biggestCharCode}`;
-    valid = new RegExp(
-      `^-?[${validDigits}${validChars}]+\\.?[${validDigits}${validChars}]*$`,
-      "ig"
-    );
-  } else {
-    valid = new RegExp(`^-?[${validDigits}]+\\.?[${validDigits}]*$`, "ig");
+    validChars += `a-${String.fromCharCode("a".charCodeAt(0) + radix - 11)}`;
   }
+
+  let valid = new RegExp(
+    `^-?0?\\.[0${validChars}]+$|^-?[${validChars}]\\.?[0${validChars}]*$`,
+    "ig"
+  );
   return valid.test(str);
 }
 
