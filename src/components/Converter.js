@@ -2,7 +2,6 @@ import React from "react";
 import { isValidNumber, convert2all } from "../utils/algo";
 import { saveCaret, restoreCaret } from "../utils/caretPositioning";
 import "../stylesheets/Converter.css";
-import { inheritInnerComments } from "@babel/types";
 
 class Converter extends React.Component {
   constructor(props) {
@@ -74,7 +73,7 @@ class Converter extends React.Component {
     [...this.numRefs.keys()].forEach(radix => {
       if (radix === 0 || radix === 1) return;
       allNumbers.push(
-        <div className="radix-number-container">
+        <div className="radix-number-container" key={radix}>
           <div className="radix-number">{this.renderNumber(radix)}</div>
           <div style={{ lineHeight: "80%" }}>
             {radix === this.state.lastRadix ? "\n" : "="}

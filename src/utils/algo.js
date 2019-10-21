@@ -133,9 +133,11 @@ export function convert2all(valueString, fromRadix, precision) {
   let [integralPart, fractionPart] = valueString.split(".");
 
   let integrals = convertIntegral(integralPart, fromRadix);
-  let fractions = fractionPart
-    ? convertFraction(fractionPart, fromRadix, precision)
-    : null;
+  let fractions =
+    fractionPart && Number(fractionPart) !== 0
+      ? convertFraction(fractionPart, fromRadix, precision)
+      : null;
+
   let sign = negative ? "-" : "";
   let numbers = Array(37)
     .fill(null)
