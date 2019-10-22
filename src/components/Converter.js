@@ -14,8 +14,6 @@ class Converter extends React.Component {
       radixValues: convert2all("1024", 10, 10),
       // how many digits would be calculated for the fractional part
       precision: 10,
-      // how many radixes are shown
-      numRows: 35,
       // radix in the last row
       lastRadix: 36
     };
@@ -49,7 +47,14 @@ class Converter extends React.Component {
     const ref = this.numRefs[radix];
 
     return (
-      <>
+      <div
+        onFocus={event => {
+          event.target.style.color = `hsla(${radix * 10}, 70%, 40%, 0.5)`;
+        }}
+        onBlur={event => {
+          event.target.style.color = `rgba(10, 10, 10, 1)`;
+        }}
+      >
         <span
           className="radix-number"
           ref={ref}
@@ -63,8 +68,8 @@ class Converter extends React.Component {
         >
           {this.state.radixValues[radix]}
         </span>
-        <sub style={{ fontSize: "50%" }}>{radix}</sub>
-      </>
+        <sub style={{ fontSize: "50%", color: "inherit" }}>{radix}</sub>
+      </div>
     );
   };
 

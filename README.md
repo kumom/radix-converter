@@ -12,7 +12,6 @@ This small tool converts numbers (integers or fractionals) from **arbitrary base
 - [ ] Allow to set precision
 - [ ] Modal window
 - [ ] Error message prompts
-- [ ] Different color for different radixes
 
 ## References
 

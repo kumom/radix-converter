@@ -1,6 +1,5 @@
 import React from "react";
 import Converter from "./Converter";
-import Header from "./Header";
 import Setting from "./Setting";
 import "../stylesheets/App.css";
 
@@ -16,7 +15,6 @@ function App() {
         rel="stylesheet"
       ></link>
       <Setting></Setting>
-      <Header></Header>
       <Converter />
     </div>
   );
