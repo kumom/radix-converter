@@ -9,7 +9,7 @@ export function isValidNumber(str, radix) {
   }
 
   let valid = new RegExp(
-    `^-?[${validChars}]+\\.?[${validChars}]*$|^-?\\.[${validChars}]+$`,
+    `^-?[${validChars}]+\\.?[${validChars}]*$|^-?\\.[${validChars}]+$|^$`,
     "ig"
   );
   return valid.test(str);
