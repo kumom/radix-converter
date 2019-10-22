@@ -141,11 +141,12 @@ export function convert2all(valueString, fromRadix, precision) {
   let sign = negative ? "-" : "";
   let numbers = Array(37)
     .fill(null)
-    .map((_, index) => {
-      if (index === 0 || index === 1) return "NaN";
+    .map((_, radix) => {
+      if (radix === 0 || radix === 1) return "NaN";
       else {
-        if (fractions) return sign + integrals[index] + "." + fractions[index];
-        else return sign + integrals[index];
+        if (radix === fromRadix) return valueString; // do not aggressively modify the value while the user is still typing
+        if (fractions) return sign + integrals[radix] + "." + fractions[radix];
+        else return sign + integrals[radix];
       }
     });
 
