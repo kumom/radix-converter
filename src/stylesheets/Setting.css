@@ -1,25 +1,28 @@
-#Setting {
+.Setting {
   display: flex;
   flex-direction: column;
   padding: 2vmin;
-  font-size: 3.5vmin;
+  font-size: 4vmin;
+  font-family: "Inconsolata", monospace;
   width: 100vw;
 }
 #set-radixes {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 #set-radixes #radix-buttons {
   display: flex;
   flex-wrap: wrap;
 }
 #set-radixes button {
-  min-width: 5vmin;
-  min-height: 5vmin;
+  width: 2.2vw;
+  height: 2.2vw;
+  margin: 0.37vmin;
+  font-family: "Inconsolata", monospace;
+  background-size: 100%;
   font-size: 2.5vmin;
   border: none;
-  margin: 0.3vmin;
   color: white;
   text-align: center;
   border-radius: 50%;
@@ -28,12 +31,15 @@
 #set-radixes button:hover {
   cursor: pointer;
 }
+#set-radixes button#github-logo {
+  background-image: url("../assets/github.png");
+}
 #slidecontainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 5vmin;
-  margin-bottom: 5vmin;
+  margin-bottom: 1vh;
   width: 100%;
 }
 #slidecontainer .slider {

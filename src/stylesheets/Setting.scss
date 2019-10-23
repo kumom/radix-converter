@@ -8,20 +8,21 @@
   cursor: pointer;
 }
 
-#Setting {
+.Setting {
   display: flex;
   flex-direction: column;
   padding: 2vmin;
-  font-size: 3.5vmin;
-  // font-size: 4vmin;
-  // font-family: "Architects Daughter", cursive;
+  font-size: 4vmin;
+  font-family: "Inconsolata", monospace;
   width: 100vw;
 }
 
 #set-radixes {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  // min-height: 10vh;
 
   #radix-buttons {
     display: flex;
@@ -29,11 +30,13 @@
   }
 
   button {
-    min-width: 5vmin;
-    min-height: 5vmin;
+    width: 2.2vw;
+    height: 2.2vw;
+    margin: 0.37vmin;
+    font-family: "Inconsolata", monospace;
+    background-size: 100%;
     font-size: 2.5vmin;
     border: none;
-    margin: 0.3vmin;
     color: white;
     text-align: center;
     border-radius: 50%;
@@ -41,6 +44,10 @@
 
     &:hover {
       cursor: pointer;
+    }
+
+    &#github-logo {
+      background-image: url("../assets/github.png");
     }
   }
 }
@@ -50,7 +57,7 @@
   flex-direction: column;
   align-items: center;
   height: 5vmin;
-  margin-bottom: 5vmin;
+  margin-bottom: 1vh;
   width: 100%;
 
   .slider {

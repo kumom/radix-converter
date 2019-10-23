@@ -6,8 +6,8 @@ import { isValidNumber, convert2all } from "../utils/algo";
 import "../stylesheets/App.css";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     let precision = 10,
       currentValue = "1024",
       currentRadix = 10,
@@ -32,7 +32,7 @@ class App extends React.Component {
       input = target.textContent;
 
     if (!isValidNumber(input, radix)) {
-      target.textContent = this.props.radixValues[radix];
+      target.textContent = this.state.radixValues[radix];
       restoreCaret(target);
     } else {
       saveCaret(target);
@@ -75,10 +75,7 @@ class App extends React.Component {
           href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
           rel="stylesheet"
         ></link>
-        <link
-          href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap"
-          rel="stylesheet"
-        ></link>
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet"></link>
         <Setting
           toggleShownRadix={this.toggleShownRadixes}
           changedPrecision={this.changedPrecision}

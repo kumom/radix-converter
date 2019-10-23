@@ -4,15 +4,9 @@ import "../stylesheets/Converter.css";
 
 class Converter extends React.Component {
   renderNumber = radix => {
+    let color = `hsla(${radix * 10}, 70%, 40%, 0.6)`;
     return (
-      <div
-        onFocus={event => {
-          event.target.style.color = `hsla(${radix * 10}, 70%, 40%, 0.5)`;
-        }}
-        onBlur={event => {
-          event.target.style.color = `rgba(10, 10, 10, 1)`;
-        }}
-      >
+      <div>
         <span
           className="radix-number"
           contentEditable={true}
@@ -20,12 +14,18 @@ class Converter extends React.Component {
           onInput={event => this.props.handleInput(event, radix)}
           onClick={event => saveCaret(event.target)}
           onKeyDown={event => saveCaret(event.target)}
+          onFocus={event => {
+          event.target.style.color = color;
+        }}
+        onBlur={event => {
+          event.target.style.color = `rgba(10, 10, 10, 0.9)`;
+        }}
           tabIndex={1}
           spellCheck={false}
         >
           {this.props.radixValues[radix]}
         </span>
-        <sub style={{ fontSize: "50%", color: "inherit" }}>{radix}</sub>
+        <span style={{ fontSize: "50%" }}>{radix}</span>
       </div>
     );
   };

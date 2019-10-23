@@ -12,6 +12,7 @@ export function isValidNumber(str, radix) {
     `^-?[${validChars}]+\\.?[${validChars}]*$|^-?\\.[${validChars}]+$|^$`,
     "ig"
   );
+
   return valid.test(str);
 }
 
