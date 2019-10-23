@@ -1,0 +1,78 @@
+#Setting {
+  display: flex;
+  flex-direction: column;
+  padding: 2vmin;
+  font-size: 3.5vmin;
+  width: 100vw;
+}
+#set-radixes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#set-radixes #radix-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+#set-radixes button {
+  min-width: 5vmin;
+  min-height: 5vmin;
+  font-size: 2.5vmin;
+  border: none;
+  margin: 0.3vmin;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  outline: 0;
+}
+#set-radixes button:hover {
+  cursor: pointer;
+}
+#slidecontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 5vmin;
+  margin-bottom: 5vmin;
+  width: 100%;
+}
+#slidecontainer .slider {
+  appearance: none;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  height: 40%;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 1vmin;
+}
+#slidecontainer .slider:hover {
+  opacity: 1;
+}
+#slidecontainer .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 4vmin;
+  height: 4vmin;
+  border-radius: 50%;
+  background: #222222;
+  cursor: pointer;
+}
+#slidecontainer .slider::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 4vmin;
+  height: 4vmin;
+  border-radius: 50%;
+  background: #222222;
+  cursor: pointer;
+}
+#slidecontainer .slider::-ms-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 4vmin;
+  height: 4vmin;
+  border-radius: 50%;
+  background: #222222;
+  cursor: pointer;
+}

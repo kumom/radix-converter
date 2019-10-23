@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 3vmin;
 }
 .radix-number-container {
   display: flex;
