@@ -1,15 +1,28 @@
-.Setting {
+#github-logo {
+  width: 1vw;
+  height: 1vw;
+  background-size: 100%;
+  background-image: url("../assets/github.png");
+}
+.MuiExpansionPanelSummary-content {
   display: flex;
-  flex-direction: column;
-  padding: 2vmin;
+  justify-content: center;
+}
+.MuiExpansionPanelSummary-content a {
+  vertical-align: baseline;
+}
+.Setting {
   font-size: 4vmin;
   font-family: "Inconsolata", monospace;
   width: 100vw;
 }
+.Setting .MuiExpansionPanelDetails-root {
+  display: flex;
+  flex-direction: column;
+}
 #set-radixes {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin-bottom: 2vmin;
 }
 #set-radixes #radix-buttons {
   display: flex;
@@ -21,7 +34,7 @@
   margin: 0.37vmin;
   font-family: "Inconsolata", monospace;
   background-size: 100%;
-  font-size: 2.5vmin;
+  font-size: 2.8vmin;
   border: none;
   color: white;
   text-align: center;
@@ -31,54 +44,20 @@
 #set-radixes button:hover {
   cursor: pointer;
 }
-#set-radixes button#github-logo {
-  background-image: url("../assets/github.png");
+input {
+  all: unset;
+  text-decoration: underline gray;
+  margin-left: 0.5ch;
+  margin-right: 0.5ch;
+  text-align: center;
+  -moz-appearance: textfield;
 }
-#slidecontainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 5vmin;
-  margin-bottom: 1vh;
-  width: 100%;
-}
-#slidecontainer .slider {
-  appearance: none;
-  outline: none;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  height: 40%;
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 1vmin;
-}
-#slidecontainer .slider:hover {
-  opacity: 1;
-}
-#slidecontainer .slider::-webkit-slider-thumb {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  -ms-appearance: none;
   appearance: none;
-  width: 4vmin;
-  height: 4vmin;
-  border-radius: 50%;
-  background: #222222;
-  cursor: pointer;
 }
-#slidecontainer .slider::-moz-range-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 4vmin;
-  height: 4vmin;
-  border-radius: 50%;
-  background: #222222;
-  cursor: pointer;
-}
-#slidecontainer .slider::-ms-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 4vmin;
-  height: 4vmin;
-  border-radius: 50%;
-  background: #222222;
-  cursor: pointer;
+input:focus {
+  outline: 0;
 }

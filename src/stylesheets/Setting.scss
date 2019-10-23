@@ -1,3 +1,9 @@
+@mixin for-all-vendor($property, $value) {
+  -webkit-#{$property}: $value;
+  -ms-#{$property}: $value;
+  #{$property}: $value;
+}
+
 @mixin sliderHandle {
   -webkit-appearance: none;
   appearance: none;
@@ -8,21 +14,36 @@
   cursor: pointer;
 }
 
-.Setting {
+#github-logo {
+  width: 1vw;
+  height: 1vw;
+  background-size: 100%;
+  background-image: url("../assets/github.png");
+}
+
+.MuiExpansionPanelSummary-content {
   display: flex;
-  flex-direction: column;
-  padding: 2vmin;
+  justify-content: center;
+
+  a {
+    vertical-align: baseline;
+  }
+}
+
+.Setting {
   font-size: 4vmin;
   font-family: "Inconsolata", monospace;
   width: 100vw;
+
+  .MuiExpansionPanelDetails-root {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 #set-radixes {
   display: flex;
-  // flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  // min-height: 10vh;
+  margin-bottom: 2vmin;
 
   #radix-buttons {
     display: flex;
@@ -35,7 +56,7 @@
     margin: 0.37vmin;
     font-family: "Inconsolata", monospace;
     background-size: 100%;
-    font-size: 2.5vmin;
+    font-size: 2.8vmin;
     border: none;
     color: white;
     text-align: center;
@@ -45,44 +66,23 @@
     &:hover {
       cursor: pointer;
     }
-
-    &#github-logo {
-      background-image: url("../assets/github.png");
-    }
   }
 }
 
-#slidecontainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 5vmin;
-  margin-bottom: 1vh;
-  width: 100%;
+input {
+  all: unset;
+  text-decoration: underline gray;
+  margin-left: 0.5ch;
+  margin-right: 0.5ch;
+  text-align: center;
+  // hide arrow
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    @include for-all-vendor(appearance, none);
+  }
 
-  .slider {
-    appearance: none;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    height: 40%;
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 1vmin;
-
-    &:hover {
-      opacity: 1;
-    }
-
-    &::-webkit-slider-thumb {
-      @include sliderHandle();
-    }
-
-    &::-moz-range-thumb {
-      @include sliderHandle();
-    }
-    &::-ms-thumb {
-      @include sliderHandle();
-    }
+  &:focus {
+    outline: 0;
   }
 }

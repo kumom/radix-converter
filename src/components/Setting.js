@@ -1,7 +1,6 @@
 import React from "react";
 import "../stylesheets/Setting.css";
 import expandedIcon from "../assets/expand.svg";
-import githubLogo from "../assets/github.png";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -36,11 +35,9 @@ class Setting extends React.Component {
       );
     });
 
-    buttons.push(<button key="github" id="github-logo"></button>);
-
     return (
       <div id="set-radixes">
-        <div id="radix-buttons">{buttons.slice(2)}</div>
+        > <div id="radix-buttons">{buttons.slice(2)}</div>
       </div>
     );
   }
@@ -50,34 +47,17 @@ class Setting extends React.Component {
     return (
       <div>
         <span>
-          <input type="number" value={precision}></input>
+          > Show
+          <input
+            type="number"
+            value={precision}
+            style={{ width: `${precision}`.length + 0.5 + "ch" }}
+          ></input>
           {precision <= 1 ? "digit" : "digits"} after the radix point
         </span>
       </div>
     );
   }
-
-  // renderSlider() {
-  //   let precision = this.props.precision,
-  //     color = `hsla(${precision * 3}, 70%, 40%, 0.6)`;
-  //   return (
-  //     <div id="slidecontainer">
-  //       <span>
-  //         <span style={{ color: color }}>{precision}</span>{" "}
-  //         {precision <= 1 ? "digit" : "digits"} after the radix point
-  //       </span>
-  //       <input
-  //         type="range"
-  //         min="0"
-  //         max="100"
-  //         value={precision}
-  //         className="slider"
-  //         style={{ background: color }}
-  //         onChange={event => this.props.changedPrecision(event.target.value)}
-  //       ></input>
-  //     </div>
-  //   );
-  // }
 
   render() {
     return (
@@ -89,7 +69,15 @@ class Setting extends React.Component {
             style={{ height: "3vh" }}
             expandIcon={<img style={{ height: "2vh" }} src={expandedIcon} />}
           >
-            Radix Converter
+            Radix C
+            <a
+              key="github"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/kumom/radix-converter"
+              id="github-logo"
+            ></a>
+            nverter
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             {this.renderRadixes()}
