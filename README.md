@@ -7,6 +7,7 @@ This small tool converts numbers (integers or fractionals) from **arbitrary base
 ## To Do
 
 - [ ] Testing
+- [ ] New line when numbers overflow the page
 - [x] Some buggy behaviors for saving/storing caret
 - [x] Display other radixes
 - [x] Allow to set precision

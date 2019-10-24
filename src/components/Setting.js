@@ -10,8 +10,9 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 class Setting extends React.Component {
   constructor(props) {
     super(props);
-    this.panel = React.createRef();
+    this.panelRef = React.createRef();
     this.githubLogoRef = React.createRef();
+    this.expandIconRef = React.createRef();
   }
   renderRadixes() {
     const inactiveColor = "rgba(34,34,34,0.7)";
@@ -68,22 +69,22 @@ class Setting extends React.Component {
   }
 
   render() {
-    const ref = this.panel,
-      githubRef = this.githubLogoRef;
+    const ref = this.panelRef;
     return (
       <div className="Setting">
         <ExpansionPanel
           ref={ref}
           onChange={(_, expanded) => {
             if (expanded) {
-              console.log(ref.current);
               ref.current.style.backgroundColor = "rgba(10,10,10,0.8)";
               ref.current.style.color = "rgba(250,250,250,0.8)";
-              githubRef.current.style.filter = "invert(80%)";
+              this.githubLogoRef.current.style.filter = "invert(80%)";
+              this.expandIconRef.current.style.filter = "invert(80%)";
             } else {
               ref.current.style.backgroundColor = "rgba(250,250,250,0.8)";
               ref.current.style.color = "rgba(10,10,10,0.8)";
-              githubRef.current.style.filter = "none";
+              this.githubLogoRef.current.style.filter = "none";
+              this.expandIconRef.current.style.filter = "none";
             }
           }}
         >
@@ -91,7 +92,12 @@ class Setting extends React.Component {
             aria-controls="header"
             id="header"
             expandIcon={
-              <img id="expand-icon" src={expandedIcon} alt="expand" />
+              <img
+                ref={this.expandIconRef}
+                id="expand-icon"
+                src={expandedIcon}
+                alt="expand"
+              />
             }
           >
             <div id="title">
