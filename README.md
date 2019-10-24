@@ -1,8 +1,6 @@
 # Radix Converter
 
-This small tool converts numbers (integers or fractions) in radix 2 to 36 with arbitrary precision.
-
-Well...we actually only accept radix from 2-36. This design matches the specs of Javascript's `numObj.toString([radix])` or `parseInt(string, radix)`. Intuitively we have `a` mapped to `10`, `b` mapped to `11`, and all the way down `z` mapped to `35`. But what's cooler is that we are not only handling `Number` type inputs, which are limited to 64 bits, but also allowing arbitrarily big numbers including fractions.
+This small tool converts numbers (integers or fractions) in radix 2 to 36 with arbitrary precision. This choice matches the specs of Javascript's `numObj.toString([radix])` or `parseInt(string, radix)`. Intuitively we have `a` mapped to `10`, `b` mapped to `11`, and all the way down `z` mapped to `35`. But what's cooler is that we are not only handling `Number` type inputs, which are limited to 64 bits, but also allowing arbitrarily big numbers including fractions.
 
 [JSBI](https://github.com/GoogleChromeLabs/jsbi) is used to ensure cross browser compatibility.
 
