@@ -6,8 +6,8 @@ class Converter extends React.Component {
   renderNumber = radix => {
     let color = `hsla(${radix * 10}, 70%, 40%, 0.6)`;
     return (
-      <div>
-        <span
+      <>
+        <div
           className="radix-number"
           contentEditable={true}
           suppressContentEditableWarning="true"
@@ -24,9 +24,9 @@ class Converter extends React.Component {
           spellCheck={false}
         >
           {this.props.radixValues[radix]}
-        </span>
-        <span style={{ fontSize: "50%" }}>{radix}</span>
-      </div>
+        </div>
+        <span className="radix">{radix}</span>
+      </>
     );
   };
 

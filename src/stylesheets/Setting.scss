@@ -14,11 +14,6 @@
   cursor: pointer;
 }
 
-.set-arrow {
-  display: inline-block;
-  margin-right: 15px;
-}
-
 .Setting {
   font-family: "Inconsolata", monospace;
   width: 100%;
@@ -27,6 +22,7 @@
     display: flex;
     flex-direction: column;
     font-size: 4vmin;
+    padding: 0px 24px 20px;
   }
 
   .MuiPaper-root {
@@ -43,8 +39,7 @@
     display: inline-block;
     width: 3vmin;
     height: 3vmin;
-    margin-left: 0.2ch;
-    margin-right: 0.2ch;
+    margin: 0 0.2ch 0;
   }
 }
 
@@ -55,7 +50,7 @@
 #set-radixes {
   display: flex;
   align-items: center;
-  margin-bottom: 2vmin;
+  margin-top: 2vmin;
 
   #radix-buttons {
     display: flex;
@@ -63,9 +58,9 @@
   }
 
   button {
-    width: 3.5vw;
-    height: 3.5vw;
-    font-size: 1.5vw;
+    width: calc(20px + 1.2vw);
+    height: calc(20px + 1.2vw);
+    font-size: calc(13px + 0.5vw);
     margin: 0.5vmin;
     font-family: "Inconsolata", monospace;
     background-size: 100%;
@@ -84,8 +79,7 @@
 input {
   all: unset;
   text-decoration: underline gray;
-  margin-left: 0.5ch;
-  margin-right: 0.5ch;
+  margin: 0 0.5ch 0;
   text-align: center;
   // hide arrow
   -moz-appearance: textfield;

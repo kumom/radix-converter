@@ -41,7 +41,6 @@ class Setting extends React.Component {
 
     return (
       <div id="set-radixes">
-        <span className="set-arrow">></span>
         <div id="radix-buttons">{buttons.slice(2)}</div>
       </div>
     );
@@ -51,7 +50,6 @@ class Setting extends React.Component {
     let precision = this.props.precision;
     return (
       <div id="precision-setter">
-        <span className="set-arrow">></span>
         Show
         <input
           type="tel"
@@ -119,8 +117,8 @@ class Setting extends React.Component {
             </div>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            {this.renderRadixes()}
             {this.renderPrecisionSetter()}
+            {this.renderRadixes()}
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
