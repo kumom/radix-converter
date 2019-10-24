@@ -1,16 +1,16 @@
 .Converter {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 3vmin;
+  align-items: flex-start;
+  margin-top: 2vh;
+  margin-left: 24px;
 }
 .radix-number-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 5vmin;
+  padding-top: 1vh;
 }
 .radix-number-container .radix-number:focus {
   outline: 0;

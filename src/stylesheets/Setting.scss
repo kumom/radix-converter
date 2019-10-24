@@ -14,35 +14,35 @@
   cursor: pointer;
 }
 
-#github-logo {
-  width: 1vw;
-  height: 1vw;
-  background-size: 100%;
-  background-image: url("../assets/github.png");
-}
-
-.MuiExpansionPanelSummary-content {
-  display: flex;
-  justify-content: center;
-
-  a {
-    vertical-align: baseline;
-  }
-}
-
 .Setting {
-  font-size: 4vmin;
   font-family: "Inconsolata", monospace;
-  width: 100vw;
+  width: 100%;
 
   .MuiExpansionPanelDetails-root {
     display: flex;
     flex-direction: column;
+    font-size: 4vmin;
   }
+}
+
+#title {
+  text-align: center;
+  font-size: 5vmin;
+
+  #github-logo {
+    display: inline-block;
+    width: 3vmin;
+    height: 3vmin;
+  }
+}
+
+#expand-icon {
+  height: 2vmin;
 }
 
 #set-radixes {
   display: flex;
+  align-items: center;
   margin-bottom: 2vmin;
 
   #radix-buttons {
@@ -51,12 +51,12 @@
   }
 
   button {
-    width: 2.2vw;
-    height: 2.2vw;
-    margin: 0.37vmin;
+    width: 3.5vw;
+    height: 3.5vw;
+    font-size: 1.5vw;
+    margin: 0.5vmin;
     font-family: "Inconsolata", monospace;
     background-size: 100%;
-    font-size: 2.8vmin;
     border: none;
     color: white;
     text-align: center;

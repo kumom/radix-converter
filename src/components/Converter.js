@@ -15,11 +15,11 @@ class Converter extends React.Component {
           onClick={event => saveCaret(event.target)}
           onKeyDown={event => saveCaret(event.target)}
           onFocus={event => {
-          event.target.style.color = color;
-        }}
-        onBlur={event => {
-          event.target.style.color = `rgba(10, 10, 10, 0.9)`;
-        }}
+            event.target.style.color = color;
+          }}
+          onBlur={event => {
+            event.target.style.color = `rgba(10, 10, 10, 0.9)`;
+          }}
           tabIndex={1}
           spellCheck={false}
         >
@@ -36,10 +36,12 @@ class Converter extends React.Component {
       if (radix === 0 || radix === 1) return;
       allNumbers.push(
         <div className="radix-number-container" key={radix}>
-          <div className="radix-number">{this.renderNumber(radix)}</div>
-          <div style={{ lineHeight: "80%" }}>
-            {radix === this.props.lastRadix ? "\n" : "="}
-          </div>
+          {radix === this.props.firstRadix ? (
+            <span>&nbsp;&nbsp;&nbsp;</span>
+          ) : (
+            <span>=&nbsp;</span>
+          )}
+          {this.renderNumber(radix)}
         </div>
       );
     });

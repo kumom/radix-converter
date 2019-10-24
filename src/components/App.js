@@ -8,7 +8,7 @@ import "../stylesheets/App.css";
 class App extends React.Component {
   constructor() {
     super();
-    let precision = 10,
+    let precision = "10",
       currentValue = "1024",
       currentRadix = 10,
       initialShownRadixes = [2, 8, 10, 16];
@@ -23,7 +23,7 @@ class App extends React.Component {
         .map((_, radix) => {
           if (initialShownRadixes.includes(radix)) return radix;
           else return null;
-        }),
+        })
     };
   }
 
@@ -45,7 +45,7 @@ class App extends React.Component {
             input.replace(/\s/g, ""),
             radix,
             this.state.precision
-          ),
+          )
         },
         () => {
           restoreCaret(target);
@@ -54,9 +54,17 @@ class App extends React.Component {
     }
   };
 
-  changedPrecision = newValue => {
-    // need to recompute here
-    this.setState({ precision: newValue });
+  changedPrecision = (target, newValue) => {
+    if (!/^\d*$/g.test(newValue)) {
+      target.value = this.state.precision;
+      restoreCaret(target);
+    } else {
+      saveCaret(target);
+      // need to recompute here
+      this.setState({ precision: newValue }, () => {
+        restoreCaret(target);
+      });
+    }
   };
 
   toggleShownRadixes = radix => {
@@ -68,27 +76,31 @@ class App extends React.Component {
   };
 
   render() {
-    let shownRadixes = this.state.radixes.filter(radix => radix != null);
+    let shownRadixes = this.state.radixes.filter(radix => radix != null),
+      precision = this.state.precision;
     return (
       <div className="App">
         <link
           href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
           rel="stylesheet"
         ></link>
-        <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet"></link>
+        <link
+          href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap"
+          rel="stylesheet"
+        ></link>
         <Setting
           toggleShownRadix={this.toggleShownRadixes}
           changedPrecision={this.changedPrecision}
-          precision={this.state.precision}
+          precision={precision}
           radixes={shownRadixes}
         />
         <Converter
           radixValues={this.state.radixValues}
-          precision={this.state.precision}
+          precision={Number(precision)}
           radixes={shownRadixes}
           currentValue={this.state.currentValue}
           currentRadix={this.state.currentRadix}
-          lastRadix={shownRadixes[shownRadixes.length - 1]}
+          firstRadix={shownRadixes[0]}
           handleInput={this.handleInput}
         />
       </div>

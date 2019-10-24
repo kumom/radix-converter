@@ -1,6 +1,8 @@
 import React from "react";
 import "../stylesheets/Setting.css";
 import expandedIcon from "../assets/expand.svg";
+import githubLogo from "../assets/github.png";
+import { saveCaret } from "../utils/caretPositioning";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -37,7 +39,8 @@ class Setting extends React.Component {
 
     return (
       <div id="set-radixes">
-        > <div id="radix-buttons">{buttons.slice(2)}</div>
+        <span>>&nbsp;</span>
+        <div id="radix-buttons">{buttons.slice(2)}</div>
       </div>
     );
   }
@@ -49,9 +52,14 @@ class Setting extends React.Component {
         <span>
           > Show
           <input
-            type="number"
+            type="tel"
             value={precision}
             style={{ width: `${precision}`.length + 0.5 + "ch" }}
+            onChange={event => {
+              this.props.changedPrecision(event.target, event.target.value);
+            }}
+            onClick={event => saveCaret(event.target)}
+            onKeyDown={event => saveCaret(event.target)}
           ></input>
           {precision <= 1 ? "digit" : "digits"} after the radix point
         </span>
@@ -66,18 +74,26 @@ class Setting extends React.Component {
           <ExpansionPanelSummary
             aria-controls="header"
             id="header"
-            style={{ height: "3vh" }}
-            expandIcon={<img style={{ height: "2vh" }} src={expandedIcon} />}
+            expandIcon={
+              <img id="expand-icon" src={expandedIcon} alt="expand" />
+            }
           >
-            Radix C
-            <a
-              key="github"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/kumom/radix-converter"
-              id="github-logo"
-            ></a>
-            nverter
+            <div id="title">
+              Radix C
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/kumom/radix-converter"
+              >
+                <img
+                  key="github"
+                  src={githubLogo}
+                  alt="github-logo"
+                  id="github-logo"
+                ></img>
+              </a>
+              nverter
+            </div>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             {this.renderRadixes()}
