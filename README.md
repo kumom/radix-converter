@@ -8,10 +8,8 @@ This small tool converts numbers (integers or fractionals) from **arbitrary base
 
 - [ ] Testing
 - [x] Some buggy behaviors for saving/storing caret
-- [ ] Display other radixes
-- [ ] Allow to set precision
-- [ ] Modal window
-- [ ] Error message prompts
+- [x] Display other radixes
+- [x] Allow to set precision
 
 ## References
 

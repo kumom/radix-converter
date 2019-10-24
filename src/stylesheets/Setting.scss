@@ -14,6 +14,11 @@
   cursor: pointer;
 }
 
+.set-arrow {
+  display: inline-block;
+  margin-right: 15px;
+}
+
 .Setting {
   font-family: "Inconsolata", monospace;
   width: 100%;
@@ -22,6 +27,11 @@
     display: flex;
     flex-direction: column;
     font-size: 4vmin;
+  }
+
+  .MuiPaper-root {
+    transition: background-color 0.5s;
+    transition: color 0.5s;
   }
 }
 
@@ -33,6 +43,8 @@
     display: inline-block;
     width: 3vmin;
     height: 3vmin;
+    margin-left: 0.2ch;
+    margin-right: 0.2ch;
   }
 }
 

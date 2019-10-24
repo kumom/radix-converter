@@ -10,7 +10,8 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 class Setting extends React.Component {
   constructor(props) {
     super(props);
-    this.menuIcon = React.createRef();
+    this.panel = React.createRef();
+    this.githubLogoRef = React.createRef();
   }
   renderRadixes() {
     const inactiveColor = "rgba(34,34,34,0.7)";
@@ -39,7 +40,7 @@ class Setting extends React.Component {
 
     return (
       <div id="set-radixes">
-        <span>>&nbsp;</span>
+        <span className="set-arrow">></span>
         <div id="radix-buttons">{buttons.slice(2)}</div>
       </div>
     );
@@ -48,29 +49,44 @@ class Setting extends React.Component {
   renderPrecisionSetter() {
     let precision = this.props.precision;
     return (
-      <div>
-        <span>
-          > Show
-          <input
-            type="tel"
-            value={precision}
-            style={{ width: `${precision}`.length + 0.5 + "ch" }}
-            onChange={event => {
-              this.props.changedPrecision(event.target, event.target.value);
-            }}
-            onClick={event => saveCaret(event.target)}
-            onKeyDown={event => saveCaret(event.target)}
-          ></input>
-          {precision <= 1 ? "digit" : "digits"} after the radix point
-        </span>
+      <div id="precision-setter">
+        <span className="set-arrow">></span>
+        Show
+        <input
+          type="tel"
+          value={precision}
+          style={{ width: `${precision}`.length + 0.5 + "ch" }}
+          onChange={event => {
+            this.props.changedPrecision(event.target, event.target.value);
+          }}
+          onClick={event => saveCaret(event.target)}
+          onKeyDown={event => saveCaret(event.target)}
+        ></input>
+        {precision <= 1 ? "digit" : "digits"} after the radix point
       </div>
     );
   }
 
   render() {
+    const ref = this.panel,
+      githubRef = this.githubLogoRef;
     return (
       <div className="Setting">
-        <ExpansionPanel>
+        <ExpansionPanel
+          ref={ref}
+          onChange={(_, expanded) => {
+            if (expanded) {
+              console.log(ref.current);
+              ref.current.style.backgroundColor = "rgba(10,10,10,0.8)";
+              ref.current.style.color = "rgba(250,250,250,0.8)";
+              githubRef.current.style.filter = "invert(80%)";
+            } else {
+              ref.current.style.backgroundColor = "rgba(250,250,250,0.8)";
+              ref.current.style.color = "rgba(10,10,10,0.8)";
+              githubRef.current.style.filter = "none";
+            }
+          }}
+        >
           <ExpansionPanelSummary
             aria-controls="header"
             id="header"
@@ -86,6 +102,7 @@ class Setting extends React.Component {
                 href="https://github.com/kumom/radix-converter"
               >
                 <img
+                  ref={this.githubLogoRef}
                   key="github"
                   src={githubLogo}
                   alt="github-logo"

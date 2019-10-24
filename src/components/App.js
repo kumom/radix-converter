@@ -60,10 +60,21 @@ class App extends React.Component {
       restoreCaret(target);
     } else {
       saveCaret(target);
-      // need to recompute here
-      this.setState({ precision: newValue }, () => {
-        restoreCaret(target);
-      });
+      this.setState(
+        {
+          precision: newValue
+        },
+        () => {
+          restoreCaret(target);
+          this.setState({
+            radixValues: convert2all(
+              this.state.currentValue,
+              this.state.currentRadix,
+              this.state.precision
+            )
+          });
+        }
+      );
     }
   };
 
