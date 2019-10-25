@@ -39,7 +39,10 @@ let num2digit = x => {
   else return String.fromCharCode("a".charCodeAt(0) + x - 10);
 };
 
-function convert2decimal(valueString, fromRadix) {
+// input: string representation of an integer in radix 2-36
+// output: BigInt of it in decimal
+// tmp!
+export function convert2decimal(valueString, fromRadix) {
   if (fromRadix === 10) return JSBI.BigInt(valueString);
 
   let result = JSBI.BigInt(0);
@@ -87,7 +90,7 @@ function convertFraction(valueString, fromRadix, precision = 5) {
   return results;
 }
 
-function convertToDecimalFraction(valueString, fromRadix, precision) {
+export function convertToDecimalFraction(valueString, fromRadix, precision) {
   if (fromRadix === 10) return JSBI.BigInt(valueString);
   else {
     let dividend = JSBI.multiply(
@@ -111,17 +114,29 @@ function convertToDecimalFraction(valueString, fromRadix, precision) {
   }
 }
 
-function convertFromDecimalFraction(valueString, toRadix, precison) {
+// tmp!!
+// input: string representation of a number's fractional part in decimal
+// output: string representation of a number's fractional part in "toRadix"
+export function convertFromDecimalFraction(valueString, toRadix, precison) {
   let result = "";
-  let multiplier = JSBI.BigInt(digit2num(`${toRadix}`)),
-    multiplicand = JSBI.BigInt(valueString);
+  let radix = JSBI.BigInt(digit2num(`${toRadix}`)),
+    //next will produce the stream of next digits of the number in toRadix
+    next = JSBI.BigInt(valueString),
+    terminate = JSBI.BigInt(0);
+  let zeros = null;
 
-  while (/[^0]/g.test(multiplicand) && result.length < precison) {
-    let offset = multiplicand.toString().length;
-    let x = JSBI.multiply(multiplicand, multiplier).toString();
-    let nextDigit = x.slice(0, x.length - offset);
+  while (result.length < precison) {
+    let x = JSBI.multiply(next, radix).toString();
+    x = zeros ? "0".repeat(zeros.length) + x : x;
+    let fractionLen = next.toString().length + (zeros ? zeros.length : 0),
+      integerLen = x.length - fractionLen;
+    let nextDigit = x.slice(0, integerLen);
     result += num2digit(Number(nextDigit));
-    multiplicand = JSBI.BigInt(x.slice(x.length - offset));
+    let hasZeros = x.match(new RegExp(`^\\d{${integerLen}}0+`, "g"));
+    zeros = hasZeros ? hasZeros[0].slice(integerLen) : "";
+    next = JSBI.BigInt(x.slice(integerLen));
+
+    if (JSBI.equal(next, terminate)) break;
   }
 
   return result;
