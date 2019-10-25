@@ -41,8 +41,7 @@ let num2digit = x => {
 
 // input: string representation of an integer in radix 2-36
 // output: BigInt of it in decimal
-// tmp!
-export function convert2decimal(valueString, fromRadix) {
+function convert2decimal(valueString, fromRadix) {
   if (fromRadix === 10) return JSBI.BigInt(valueString);
 
   let result = JSBI.BigInt(0);
@@ -114,10 +113,9 @@ export function convertToDecimalFraction(valueString, fromRadix, precision) {
   }
 }
 
-// tmp!!
 // input: string representation of a number's fractional part in decimal
 // output: string representation of a number's fractional part in "toRadix"
-export function convertFromDecimalFraction(valueString, toRadix, precison) {
+function convertFromDecimalFraction(valueString, toRadix, precison) {
   let result = "";
   let radix = JSBI.BigInt(digit2num(`${toRadix}`)),
     //next will produce the stream of next digits of the number in toRadix
