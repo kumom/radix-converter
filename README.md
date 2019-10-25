@@ -8,7 +8,7 @@ _[JSBI](https://github.com/GoogleChromeLabs/jsbi) is used to ensure cross browse
 
 ## To Do
 
-- [x] Testing
+- [x] Testing the algorithm
 - [x] Prevent numbers from overflowing
 - [x] Some buggy behaviors for saving/storing caret
 - [x] Display other radixes
