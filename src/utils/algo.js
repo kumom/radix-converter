@@ -9,7 +9,7 @@ export function isValidNumber(str, radix) {
   }
 
   let valid = new RegExp(
-    `^-?[${validChars}]+\\.?[${validChars}]*$|^-?\\.[${validChars}]+$|^$`,
+    `^-?[${validChars}]*\\.?[${validChars}]*$|^-?\\.[${validChars}]+$|^$`,
     "ig"
   );
 
@@ -141,10 +141,10 @@ function convertFromDecimalFraction(valueString, toRadix, precison) {
 }
 
 export function convert2all(valueString, fromRadix, precision) {
-  let negative = valueString[0] === "-";
-  valueString = negative ? valueString.slice(1) : valueString;
+  let negative = valueString[0] === "-",
+    nonnegativeStr = negative ? valueString.slice(1) : valueString;
 
-  let [integralPart, fractionPart] = valueString.split(".");
+  let [integralPart, fractionPart] = nonnegativeStr.split(".");
 
   let integrals = convertIntegral(integralPart, fromRadix);
   let fractions =
