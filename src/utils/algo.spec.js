@@ -13,9 +13,9 @@ it("should convert numbers in arbitrary radixes", () => {
   expect(convert2all("23421", 10, 25)[2]).toEqual("101101101111101");
   expect(convert2all("asfcu", 32, 25)[9]).toEqual("23433870");
   expect(convert2all("amdfhj", 24, 25)[17]).toEqual("3a605e5");
-  // expect(convert2all("asf.ucf", 32, 25)[9]).toEqual(
-  //   "16260.8482740282772136686146604"
-  // );
+  expect(convert2all("asf.ucf", 32, 25)[9]).toEqual(
+    "16260.8482740282772136686146604"
+  );
 });
 
 /* Expose the following functions temporarily for testing only */
