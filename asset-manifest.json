@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/radix-converter/static/css/main.2bc20002.chunk.css",
-    "main.js": "/radix-converter/static/js/main.7d1cb241.chunk.js",
-    "main.js.map": "/radix-converter/static/js/main.7d1cb241.chunk.js.map",
+    "main.js": "/radix-converter/static/js/main.7085b5a2.chunk.js",
+    "main.js.map": "/radix-converter/static/js/main.7085b5a2.chunk.js.map",
     "runtime-main.js": "/radix-converter/static/js/runtime-main.982968eb.js",
     "runtime-main.js.map": "/radix-converter/static/js/runtime-main.982968eb.js.map",
-    "static/js/2.6034d764.chunk.js": "/radix-converter/static/js/2.6034d764.chunk.js",
-    "static/js/2.6034d764.chunk.js.map": "/radix-converter/static/js/2.6034d764.chunk.js.map",
+    "static/js/2.056e9776.chunk.js": "/radix-converter/static/js/2.056e9776.chunk.js",
+    "static/js/2.056e9776.chunk.js.map": "/radix-converter/static/js/2.056e9776.chunk.js.map",
     "index.html": "/radix-converter/index.html",
     "static/css/main.2bc20002.chunk.css.map": "/radix-converter/static/css/main.2bc20002.chunk.css.map",
-    "static/js/2.6034d764.chunk.js.LICENSE.txt": "/radix-converter/static/js/2.6034d764.chunk.js.LICENSE.txt",
+    "static/js/2.056e9776.chunk.js.LICENSE.txt": "/radix-converter/static/js/2.056e9776.chunk.js.LICENSE.txt",
     "static/media/expand.574638d6.svg": "/radix-converter/static/media/expand.574638d6.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.982968eb.js",
-    "static/js/2.6034d764.chunk.js",
+    "static/js/2.056e9776.chunk.js",
     "static/css/main.2bc20002.chunk.css",
-    "static/js/main.7d1cb241.chunk.js"
+    "static/js/main.7085b5a2.chunk.js"
   ]
 }
