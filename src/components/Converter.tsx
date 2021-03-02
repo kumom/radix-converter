@@ -55,9 +55,11 @@ function NumberContainer(
 
   const setDimension = useCallback((node: HTMLTextAreaElement | null) => {
     if (!node) return;
-    const dimension = getDimension(node.innerHTML);
-    node.style.width = (dimension[0] + 4) + 'px';
-    node.style.height = dimension[1] + 'px';
+    const [width, height] = getDimension(node.innerHTML);
+    node.style.width = (width + 4) + 'px';
+    // We only set the height when the component is mounted for the first time
+    if (height)
+      node.style.height = (height + 10) + 'px';
   }, [props.value])
 
   return <div className="number-container">

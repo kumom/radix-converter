@@ -23,7 +23,10 @@ class App extends React.Component<{}, { [key: string]: any }> {
   }
 
   updateDecimalPlaces(newValue: number) {
-    this.setState({ decimalPlaces: newValue });
+    console.log(newValue);
+    this.setState({ decimalPlaces: newValue }, () => {
+      console.log(this.state.decimalPlaces)
+    });
   };
 
   toggleVisibility(radix: number) {

@@ -49,4 +49,5 @@
 .input-validity {
   color: rgba(233, 28, 14, 0.8);
   font-size: 3vmin;
+  margin-bottom: 10px; // 10px height is added to .number to prevent scrollbar from blocking numebrs
 }

@@ -91,11 +91,9 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
       defaultValue={props.decimalPlaces}
       style={{ width: `${props.decimalPlaces}`.length + 0.5 + "ch" }}
       onChange={event => {
-        const value = Number(event.target.value);
-        const isInt = !event.target.value.includes('.');
-        const isPos = !(event.target.value[0] === '-');
-        if (event.target.value && isPos && isInt && value >= 0)
-          props.updateDecimalPlaces(value);
+        event.target.style.width = event.target.scrollWidth + 'px';
+        if (/^\d+$/.test(event.target.value))
+          props.updateDecimalPlaces(Number(event.target.value));
       }}
     ></input>
     {props.decimalPlaces <= 1 ? "digit" : "digits"} after the radix point
