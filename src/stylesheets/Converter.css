@@ -5,25 +5,43 @@
   margin-top: 2vh;
   margin-bottom: 2vh;
   margin-left: 24px;
+  width: 100vw;
 }
-.radix-number-container {
+
+.number-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 90vw;
   font-size: 5vmin;
 }
-.radix-number-container .radix-number:focus {
-  outline: 0;
+.number-container .number:focus {
   text-shadow: 0px 2px 2px;
+  text-decoration: underline;
 }
-.radix-number-container .radix-number {
-  max-width: 90vw;
-  white-space: nowrap;
+.number-container .number {
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 5vmin;
   overflow: auto;
-  padding: 10px 0 10px;
+  outline: none;
+  resize: none;
+  -webkit-box-shadow: none;
+  -ms-box-shadow: none;
+  box-shadow: none;
+  white-space: nowrap;
 }
-.radix-number-container .radix {
+.number-container .radix {
   display: table-cell;
-  font-size: 50%;
+  font-size: 2.5vmin;
+  -webkit-transform: translate(0, 1ch);
+  -ms-transform: translate(0, 1ch);
   transform: translate(0, 1ch);
 }
+
+.input-validity {
+  color: green;
+}
+
+/*# sourceMappingURL=Converter.css.map */
