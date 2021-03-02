@@ -13,6 +13,12 @@ class Header extends React.Component<{ [key: string]: any }, { [key: string]: an
   }
 
   render() {
+    let radixButtons: JSX.Element[] = [];
+    Array(37).fill(null).forEach((v: any, i: number) => {
+      if (i < 2) return;
+      radixButtons.push(<RadixButton key={i} radix={i} show={this.props.mask[i]} toggleVisibility={this.props.toggleVisibility} />);
+    });
+
     return (
       <div className="Header">
         <Accordion
@@ -37,10 +43,7 @@ class Header extends React.Component<{ [key: string]: any }, { [key: string]: an
             <DecimalPlacesSetter decimalPlaces={this.props.decimalPlaces} updateDecimalPlaces={this.props.updateDecimalPlaces} />
             <div id="set-radixes">
               <div id="radix-buttons">
-                {Array(37).fill(null).map((v: any, i: number) => {
-                  if (i < 2) return;
-                  return <RadixButton key={i} radix={i} show={this.props.mask[i]} toggleVisibility={this.props.toggleVisibility} />
-                })}
+                {radixButtons}
               </div>
             </div>
           </AccordionDetails>
@@ -54,7 +57,7 @@ function RadixButton(props: { radix: number, show: boolean, toggleVisibility: (r
   const inactiveColor = "rgba(34,34,34,0.7)";
   const activeColor = (radix: number) => `hsla(${radix * 10}, 70%, 40%, 0.6)`;
 
-  return <button key={props.radix} style={{ backgroundColor: props.show ? activeColor(props.radix) : inactiveColor }}
+  return <button style={{ backgroundColor: props.show ? activeColor(props.radix) : inactiveColor }}
     onClick={() => { props.toggleVisibility(props.radix) }}>
     {props.radix}
   </button>

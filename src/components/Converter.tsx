@@ -31,15 +31,15 @@ export default function Converter(props: {
         const showValue: string = radix === props.currentRadix ? props.currentValue : value;
         const valid: boolean = radix !== props.currentRadix || value !== 'NaN';
 
-        return <><NumberContainer key={radix} value={showValue} radix={radix}
+        return <div key={radix}><NumberContainer value={showValue} radix={radix}
           firstRadix={radix === firstRadix} changeValue={props.changeValue}
-          marginRight={radix == firstRadix ? `${extraPadding + padding}px` : `${padding}px`} />
+          marginRight={radix === firstRadix ? `${extraPadding + padding}px` : `${padding}px`} />
           <div className={"input-validity"}
             style={{
               display: valid ? "none" : "block",
               marginLeft: `${extraPadding + padding}px`
             }}>(Invalid input)</div>
-        </>
+        </div>
       })
     }
   </div>;
