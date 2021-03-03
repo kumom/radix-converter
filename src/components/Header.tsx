@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import "../stylesheets/Header.css";
 import expandedIcon from "../assets/expand.svg";
 import githubLogo from "../assets/github.png";
+import { getDimension } from "../util/resize";
 
 class Header extends React.Component<{ [key: string]: any }, { [key: string]: any }> {
   constructor(props: { decimalPlaces: number, mask: boolean[], currentValue: string, currentRadix: number }) {
@@ -84,20 +85,56 @@ function Title(props: { expanded: boolean }) {
 }
 
 function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces: (value: number) => void }) {
+  let prevDecimalPlaces: number = props.decimalPlaces;
+  const [outOfRange, setOutOfRange] = useState(false);
+
+  useEffect(() => {
+    const node = document.getElementById("decimal-place-setter")! as HTMLInputElement;
+    const width = getDimension(node.value, { fontSize: "3.5vmin", fontFamily: "Inconsolata, monospace" })[0];
+    node.style.width = (width + 10) + 'px';
+  })
+
   return <div>
     Show
       <input
+      id="decimal-place-setter"
       type="number"
       defaultValue={props.decimalPlaces}
-      style={{ width: `${props.decimalPlaces}`.length + 0.5 + "ch" }}
-      onChange={event => {
-        event.target.style.width = event.target.scrollWidth + 'px';
-        if (/^\d+$/.test(event.target.value))
-          props.updateDecimalPlaces(Number(event.target.value));
+      min="0"
+      max="65000"
+      onKeyDown={event => {
+        if (event.key === "-" || event.key === ".")
+          event.preventDefault();
       }}
-    ></input>
-    {props.decimalPlaces <= 1 ? "digit" : "digits"} after the radix point
-    </div>;
+      onPaste={event => {
+        const data = event.clipboardData.getData("text/plain");
+        if (!/^\d+$/.test(data)) {
+          event.preventDefault();
+          props.updateDecimalPlaces(prevDecimalPlaces);
+        }
+      }}
+      onChange={event => {
+        if (/^\d+$/.test(event.target.value)) {
+          const value = Number(event.target.value);
+          if (value <= 65000) {
+            props.updateDecimalPlaces(value);
+            prevDecimalPlaces = value;
+            setOutOfRange(false);
+          }
+          else {
+            props.updateDecimalPlaces(65000);
+            setOutOfRange(true);
+          }
+        }
+      }}
+    ></input>decimal {props.decimalPlaces <= 1 ? "digit" : "digits"}
+    <div style={{
+      marginTop: "5px",
+      fontSize: "80%",
+      color: "rgba(227, 36, 36, 0.8)",
+      display: outOfRange ? "block" : "none"
+    }}>(OUT OF RANGE: maximum is 65000)</div>
+  </div>;
 }
 
 export default Header;

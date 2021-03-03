@@ -21,13 +21,18 @@
   .MuiAccordionDetails-root {
     display: flex;
     flex-direction: column;
-    font-size: 4vmin;
-    padding: 0px 24px 20px;
+    font-size: 3.5vmin;
+    padding: 0px 50px 20px 30px;
+  }
+
+  .MuiAccordionSummary-root {
+    padding: 5px 30px;
   }
 
   .MuiPaper-root {
     transition: background-color 0.5s;
     transition: color 0.5s;
+    padding: 0px 30px;
   }
 }
 
@@ -51,6 +56,7 @@
   display: flex;
   align-items: center;
   margin-top: 2vmin;
+  margin-left: -5px;
 
   #radix-buttons {
     display: flex;
@@ -58,9 +64,9 @@
   }
 
   button {
-    width: calc(20px + 1.2vw);
-    height: calc(20px + 1.2vw);
-    font-size: calc(13px + 0.5vw);
+    width: calc(22px + 1.2vw);
+    height: calc(22px + 1.2vw);
+    font-size: calc(15px + 0.5vw);
     margin: 0.5vmin;
     font-family: "Inconsolata", monospace;
     background-size: 100%;

@@ -1,6 +1,9 @@
 import React, { useCallback } from "react";
 import BigNumber from "bignumber.js";
 import "../stylesheets/Converter.css";
+import { getDimension } from "../util/resize";
+
+const fontStyle = { fontFamily: "Montserrat, sans-serif", fontSize: "5vmin" };
 
 export default function Converter(props: {
   currentValue: string
@@ -10,7 +13,7 @@ export default function Converter(props: {
   changeValue: (v: string, radix: number) => void
 }) {
   const padding = 10;
-  const extraPadding = getDimension('=')[0];
+  const extraPadding = getDimension('=', fontStyle)[0];
 
   let firstRadix: number | null = null;
   for (let i = 2; i <= 36; i++) {
@@ -55,7 +58,7 @@ function NumberContainer(
 
   const setDimension = useCallback((node: HTMLTextAreaElement | null) => {
     if (!node) return;
-    const [width, height] = getDimension(node.innerHTML);
+    const [width, height] = getDimension(node.innerHTML, fontStyle);
     node.style.width = (width + 4) + 'px';
     // We only set the height when the component is mounted for the first time
     if (height)
@@ -82,23 +85,4 @@ function NumberContainer(
     />
     <span className="radix">{props.radix}</span>
   </div>;
-}
-
-const getDimension = (content: string): [number, number] => {
-  // style has to match the <textarea/> element in order to precisely measure the dimension
-  const sizeHelper = document.createElement('div');
-  document.body.append(sizeHelper);
-  sizeHelper.innerHTML = content;
-  sizeHelper.style.display = "block";
-  sizeHelper.style.visibility = "hidden";
-  sizeHelper.style.maxHeight = "100vh";
-  sizeHelper.style.maxWidth = "100vw";
-  sizeHelper.style.fontFamily = "Montserrat, sans-serif";
-  sizeHelper.style.fontSize = "5vmin";
-  sizeHelper.style.position = "fixed";
-  sizeHelper.style.overflow = "auto";
-  const width = sizeHelper.offsetWidth;
-  const height = sizeHelper.offsetHeight;
-  document.body.removeChild(sizeHelper);
-  return [width, height];
 }
