@@ -1,52 +1,48 @@
 .Header {
-  font-family: "Inconsolata", monospace;
   width: 100%;
+  font-size: 45px;
 }
 .Header .MuiAccordionDetails-root {
   display: flex;
   flex-direction: column;
-  font-size: 3.5vmin;
-  padding: 0px 50px 20px 30px;
-}
-.Header .MuiAccordionSummary-root {
-  padding: 5px 30px;
+  font-size: 0.7em;
+  padding-bottom: 1em;
 }
 .Header .MuiPaper-root {
   transition: background-color 0.5s;
   transition: color 0.5s;
-  padding: 0px 30px;
+  padding: 0px 50px;
 }
 
 #title {
   text-align: center;
-  font-size: 5vmin;
+  font-size: 1em;
 }
 #title #github-logo {
   display: inline-block;
-  width: 3vmin;
-  height: 3vmin;
-  margin: 0 0.2ch 0;
+  width: 0.55em;
+  height: 0.55em;
 }
 
 #expand-icon {
-  height: 2vmin;
+  height: 0.7em;
 }
 
 #set-radixes {
   display: flex;
   align-items: center;
-  margin-top: 2vmin;
-  margin-left: -5px;
+  margin-top: 0.5em;
+  margin-left: -0.2em;
 }
 #set-radixes #radix-buttons {
   display: flex;
   flex-wrap: wrap;
 }
 #set-radixes button {
-  width: calc(22px + 1.2vw);
-  height: calc(22px + 1.2vw);
+  width: 2em;
+  height: 2em;
   font-size: calc(15px + 0.5vw);
-  margin: 0.5vmin;
+  margin: 5px;
   font-family: "Inconsolata", monospace;
   background-size: 100%;
   border: none;
@@ -62,8 +58,11 @@
 input {
   all: unset;
   text-decoration: underline gray;
-  margin: 0 0.5ch 0;
+  margin: 0 0.3em 0;
   text-align: center;
+  font-family: "Inconsolata", monospace;
+  max-width: 50vw;
+  overflow: hidden;
   -moz-appearance: textfield;
 }
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {

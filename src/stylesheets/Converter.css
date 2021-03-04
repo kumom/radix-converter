@@ -4,17 +4,24 @@
   align-items: flex-start;
   margin-top: 2vh;
   margin-bottom: 2vh;
-  margin-left: 24px;
+  margin-left: 30px;
   width: 100vw;
+}
+.Converter .converter-item {
+  font-size: 40px;
+}
+
+.equals-number {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .number-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
-  width: 95vw;
-  font-size: 5vmin;
 }
 .number-container .number:focus {
   text-shadow: 0px 2px 2px;
@@ -22,29 +29,36 @@
 }
 .number-container .number {
   border: none;
-  font-family: "Montserrat", sans-serif;
-  font-size: 5vmin;
-  overflow: auto;
+  overflow: hidden;
   outline: none;
   resize: none;
+  max-width: 70vw;
   -webkit-box-shadow: none;
   -ms-box-shadow: none;
   box-shadow: none;
-  white-space: nowrap;
-  margin: 5px 0px 5px 0px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 .number-container .radix {
   display: table-cell;
-  font-size: 2.5vmin;
-  -webkit-transform: translate(0, 1ch);
-  -ms-transform: translate(0, 1ch);
-  transform: translate(0, 1ch);
+  font-size: 0.5em;
+}
+
+.number, .equal-sign {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+}
+
+.equal-sign {
+  margin-right: 0.3em;
 }
 
 .input-validity {
-  color: rgba(87, 87, 87, 0.8);
-  font-size: 3vmin;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  font-size: 0.7em;
+  color: rgba(227, 36, 36, 0.8);
+  margin-left: 0.3em;
 }
 
 /*# sourceMappingURL=Converter.css.map */

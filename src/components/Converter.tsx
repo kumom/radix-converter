@@ -1,9 +1,7 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import BigNumber from "bignumber.js";
 import "../stylesheets/Converter.css";
-import { getDimension } from "../util/resize";
-
-const fontStyle = { fontFamily: "Montserrat, sans-serif", fontSize: "5vmin" };
+import { resize } from "../util/resize";
 
 export default function Converter(props: {
   currentValue: string
@@ -12,10 +10,7 @@ export default function Converter(props: {
   mask: boolean[],
   changeValue: (v: string, radix: number) => void
 }) {
-  const padding = 10;
-  const extraPadding = getDimension('=', fontStyle)[0];
-
-  let firstRadix: number | null = null;
+  let firstRadix: number = 2;
   for (let i = 2; i <= 36; i++) {
     if (props.mask[i]) {
       firstRadix = i;
@@ -34,14 +29,16 @@ export default function Converter(props: {
         const showValue: string = radix === props.currentRadix ? props.currentValue : value;
         const valid: boolean = radix !== props.currentRadix || value !== 'NaN';
 
-        return <div key={radix}><NumberContainer value={showValue} radix={radix}
-          firstRadix={radix === firstRadix} changeValue={props.changeValue}
-          marginRight={radix === firstRadix ? `${extraPadding + padding}px` : `${padding}px`} />
-          <div className={"input-validity"}
-            style={{
-              display: valid ? "none" : "block",
-              marginLeft: `${extraPadding + padding}px`
-            }}>(Invalid input)</div>
+        return <div key={radix} className="converter-item">
+          <div className="equals-number">
+            <span className="equal-sign" style={{ visibility: firstRadix === radix ? "hidden" : "visible" }}>=</span>
+            <NumberContainer value={showValue} radix={radix}
+              firstRadix={radix === firstRadix} changeValue={props.changeValue} />
+          </div>
+          <div className="input-validity" style={{ display: valid ? "none" : "block" }}>
+            <span className="equal-sign" style={{ visibility: "hidden" }}>=</span>
+            (Invalid input)
+          </div>
         </div>
       })
     }
@@ -50,25 +47,21 @@ export default function Converter(props: {
 
 function NumberContainer(
   props: {
-    value: string, radix: number, firstRadix: boolean, marginRight: string
+    value: string, radix: number, firstRadix: boolean
     changeValue: (v: string, radix: number) => void
   }) {
   const unfocusedColor = "rgba(10, 10, 10, 0.82)";
-  const marginRight = props.marginRight;
 
   const setDimension = useCallback((node: HTMLTextAreaElement | null) => {
     if (!node) return;
-    const [width, height] = getDimension(node.innerHTML, fontStyle);
-    node.style.width = (width + 4) + 'px';
-    // We only set the height when the component is mounted for the first time
-    if (height)
-      node.style.height = (height + 10) + 'px';
+    resize(node, 15);
+    window.addEventListener('resize', () => resize(node));
   }, [props.value])
 
   return <div className="number-container">
-    {props.firstRadix ? (<span style={{ marginRight }}></span>) : (<span style={{ marginRight }}>=</span>)}
     <textarea
       className="number"
+      ref={setDimension}
       onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
         props.changeValue(event.target.value, props.radix);
       }}
@@ -81,7 +74,6 @@ function NumberContainer(
       style={{ color: unfocusedColor }}
       spellCheck={false}
       value={props.value}
-      ref={setDimension}
     />
     <span className="radix">{props.radix}</span>
   </div>;

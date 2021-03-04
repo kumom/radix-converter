@@ -11,7 +11,7 @@ class App extends React.Component<{}, { [key: string]: any }> {
     this.updateDecimalPlaces = this.updateDecimalPlaces.bind(this);
 
     this.state = {
-      currentValue: 0,
+      currentValue: 1024,
       currentRadix: 10,
       decimalPlaces: 10,
       mask: Array(37).fill(null).map((v, i) => [2, 8, 10, 16].includes(i))
@@ -30,11 +30,6 @@ class App extends React.Component<{}, { [key: string]: any }> {
     let mask = this.state.mask.slice(0);
     mask[radix] = !mask[radix];
     this.setState({ mask });
-  }
-
-  componentDidMount() {
-    // Force initial resize of <textarea> element
-    setTimeout(() => { this.setState({ currentValue: 1024, currentRadix: 10 }) }, 500);
   }
 
   render() {

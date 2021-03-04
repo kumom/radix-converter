@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import "../stylesheets/Header.css";
 import expandedIcon from "../assets/expand.svg";
 import githubLogo from "../assets/github.png";
-import { getDimension } from "../util/resize";
+import { resize } from "../util/resize";
 
 class Header extends React.Component<{ [key: string]: any }, { [key: string]: any }> {
-  constructor(props: { decimalPlaces: number, mask: boolean[], currentValue: string, currentRadix: number }) {
+  constructor(props: {
+    decimalPlaces: number,
+    mask: boolean[],
+    currentValue: string,
+    currentRadix: number,
+    toggleVisibility: (radix: number) => void,
+    updateDecimalPlaces: (val: number) => void
+  }) {
     super(props);
     this.state = {
       expanded: false
@@ -86,18 +93,19 @@ function Title(props: { expanded: boolean }) {
 
 function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces: (value: number) => void }) {
   let prevDecimalPlaces: number = props.decimalPlaces;
+  const decimalPlaceRef = useRef(null);
   const [outOfRange, setOutOfRange] = useState(false);
 
   useEffect(() => {
-    const node = document.getElementById("decimal-place-setter")! as HTMLInputElement;
-    const width = getDimension(node.value, { fontSize: "3.5vmin", fontFamily: "Inconsolata, monospace" })[0];
-    node.style.width = (width + 10) + 'px';
+    const el = decimalPlaceRef.current! as HTMLInputElement;
+    resize(el, 5, 0);
+    window.addEventListener('resize', () => resize(el));
   })
 
   return <div>
     Show
       <input
-      id="decimal-place-setter"
+      ref={decimalPlaceRef}
       type="number"
       defaultValue={props.decimalPlaces}
       min="0"
