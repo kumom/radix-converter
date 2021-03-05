@@ -38,8 +38,7 @@ export default function Converter(props: {
             <span className="equal-sign" style={{ visibility: firstRadix === radix ? "hidden" : "visible" }}>=</span>
             <NumberContainer value={showValue} radix={radix}
               firstRadix={radix === firstRadix} updateValue={props.updateValue} />
-              {/* style={{ display: radix === editingRadix ? "block" : "none" }} */}
-            <div className="stepButtons" >
+            <div className="stepButtons" style={{ display: radix === editingRadix ? "block" : "none" }}>
               <button
                 style={{ backgroundColor: activeColor(radix), lineHeight: "0.8em" }}
                 onMouseDown={event => { event.preventDefault() }}

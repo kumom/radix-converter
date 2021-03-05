@@ -14,7 +14,7 @@
   padding: 0;
 }
 .Header .MuiAccordion-root .MuiAccordionSummary-root .MuiAccordionSummary-content {
-  margin: 1.5vh 5vw;
+  margin: 2.5vh 5vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -33,7 +33,7 @@
   flex-direction: column;
   font-size: 0.7em;
   padding: 0;
-  margin: 1vh 5vw 3vh 5vw;
+  margin: 1vh 5vw 2.5vh 5vw;
 }
 .Header .MuiAccordion-root .MuiAccordionDetails-root input {
   all: unset;
