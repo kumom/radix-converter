@@ -5,8 +5,9 @@
 }
 
 .Header {
-  width    : 100%;
-  font-size: 5vh;
+  width      : 100%;
+  font-size  : 6vh;
+  font-weight: 600;
 
   .MuiAccordion-root {
     display       : flex;
@@ -29,8 +30,9 @@
         #title {
           #github-logo {
             display: inline-block;
-            width  : 0.55em;
-            height : 0.55em;
+            width  : 0.5em;
+            height : 0.5em;
+            margin : 0 0.1em;
           }
         }
 
@@ -50,13 +52,14 @@
       input {
         all            : unset;
         text-decoration: underline gray;
-        margin         : 0 0.3em 0;
+        margin         : 0 0.5em 0;
         text-align     : center;
-        font-family    : "Inconsolata", monospace;
+        font-family    : "Cutive Mono", monospace;
         max-width      : 50vw;
         overflow       : hidden;
         // hide arrow
         -moz-appearance: textfield;
+        font-size      : 4vh;
 
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
@@ -69,17 +72,17 @@
       }
 
       #radix-buttons {
-        display  : flex;
+        display    : flex;
         align-items: center;
-        flex-wrap: wrap;
+        flex-wrap  : wrap;
         margin     : 1vh 0 0 -0.2em;
 
         button {
           width        : 5vh;
           height       : 5vh;
-          font-size    : 2.7vh;
+          font-size    : 3vh;
           margin       : 5px;
-          font-family  : "Inconsolata", monospace;
+          font-family  : "Cutive Mono", monospace;
           border       : none;
           color        : white;
           border-radius: 50%;

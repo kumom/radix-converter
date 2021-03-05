@@ -71,7 +71,7 @@ function RadixButton(props: { radix: number, show: boolean, toggleVisibility: (r
 function Title(props: { expanded: boolean }) {
   return <div>
     <div id="title">
-      Radix <span style={{ display: "inline-block",  whiteSpace: "nowrap"}}>C
+      Radix <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>C
           <a
           target="_blank"
           rel="noopener noreferrer"
@@ -95,11 +95,13 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
   let prevDecimalPlaces: number = props.decimalPlaces;
   const decimalPlaceRef = useRef(null);
   const [outOfRange, setOutOfRange] = useState(false);
+  let subscribeToResize = false;
 
   useEffect(() => {
-    const el = decimalPlaceRef.current! as HTMLInputElement;
-    resize(el);
-    window.addEventListener('resize', () => resize(el));
+    const node = decimalPlaceRef.current! as HTMLInputElement;
+    resize(node);
+    if (!subscribeToResize)
+      window.addEventListener('resize', () => resize(node));
   })
 
   return <div>

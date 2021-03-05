@@ -14,15 +14,15 @@
 
   .number-line {
     width         : 100%;
-    font-size     : 5vh;
+    font-size     : 6vh;
     padding       : 0 5vw;
     display       : flex;
     flex-direction: row;
     flex-wrap     : wrap;
 
     .equal-sign {
-      font-family : "Montserrat", sans-serif;
-      font-size   : 1em;
+      font-family : "Cutive Mono", monospace;
+      font-size   : 1.1em;
       margin-right: 0.2em;
     }
 
@@ -46,7 +46,7 @@
         @include for-all-vendor(box-shadow, none);
         white-space: pre-wrap;
         word-wrap  : break-word;
-        font-family: "Montserrat", sans-serif;
+        font-family: "Cutive Mono", monospace;
         font-size  : 1em;
       }
 
@@ -64,7 +64,7 @@
       button {
         border          : none;
         background-color: rgb(80, 80, 80);
-        font-family     : "Montserrat", sans-serif;
+        font-family     : "Cutive Mono", monospace;
         font-weight     : 500;
         color           : white;
         border-radius   : 60%;

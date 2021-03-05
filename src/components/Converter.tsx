@@ -33,28 +33,28 @@ export default function Converter(props: {
         const valid: boolean = radix !== props.currentRadix || valueStr !== 'NaN';
 
         return <div key={radix} className="number-line"
-            onFocus={() => { setEditingRadix(radix) }}
-            onBlur={() => { setEditingRadix(0) }}>
-            <span className="equal-sign" style={{ visibility: firstRadix === radix ? "hidden" : "visible" }}>=</span>
-            <NumberContainer value={showValue} radix={radix}
-              firstRadix={radix === firstRadix} updateValue={props.updateValue} />
-            <div className="stepButtons" style={{ display: radix === editingRadix ? "block" : "none" }}>
-              <button
-                style={{ backgroundColor: activeColor(radix), lineHeight: "0.8em" }}
-                onMouseDown={event => { event.preventDefault() }}
-                onClick={() => {
-                  const newValue = value.plus(1);
-                  props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
-                }}>+</button>
-              <button
-                style={{ backgroundColor: activeColor(radix), lineHeight: "0.5em" }}
-                onMouseDown={event => { event.preventDefault() }}
-                onClick={() => {
-                  const newValue = value.minus(1);
-                  props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
-                }}>-</button>
-            </div>
+          onFocus={() => { setEditingRadix(radix) }}
+          onBlur={() => { setEditingRadix(0) }}>
+          <span className="equal-sign" style={{ visibility: firstRadix === radix ? "hidden" : "visible" }}>=</span>
+          <NumberContainer value={showValue} radix={radix}
+            firstRadix={radix === firstRadix} updateValue={props.updateValue} />
+          <div className="stepButtons" style={{ display: radix === editingRadix ? "block" : "none" }}>
+            <button
+              style={{ backgroundColor: activeColor(radix), lineHeight: "0.8em" }}
+              onMouseDown={event => { event.preventDefault() }}
+              onClick={() => {
+                const newValue = value.plus(1);
+                props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
+              }}>+</button>
+            <button
+              style={{ backgroundColor: activeColor(radix), lineHeight: "0.5em" }}
+              onMouseDown={event => { event.preventDefault() }}
+              onClick={() => {
+                const newValue = value.minus(1);
+                props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
+              }}>-</button>
           </div>
+        </div>
       })
     }
   </div>;
@@ -66,10 +66,13 @@ function NumberContainer(
     updateValue: (v: string, radix: number) => void
   }) {
   const unfocusedColor = "rgba(10, 10, 10, 0.82)";
+  let subscribeToResize = false;
 
   const setDimension = useCallback((node: HTMLTextAreaElement | null) => {
     if (!node) return;
     resize(node);
+    if (!subscribeToResize)
+      window.addEventListener('resize', () => resize(node));
   }, [props.value])
 
   return <div className="number-container">

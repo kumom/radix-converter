@@ -1,6 +1,7 @@
 .Header {
   width: 100%;
-  font-size: 5vh;
+  font-size: 6vh;
+  font-weight: 600;
 }
 .Header .MuiAccordion-root {
   display: flex;
@@ -22,8 +23,9 @@
 }
 .Header .MuiAccordion-root .MuiAccordionSummary-root .MuiAccordionSummary-content #title #github-logo {
   display: inline-block;
-  width: 0.55em;
-  height: 0.55em;
+  width: 0.5em;
+  height: 0.5em;
+  margin: 0 0.1em;
 }
 .Header .MuiAccordion-root .MuiAccordionSummary-root .MuiAccordionSummary-content #expand-icon {
   height: 2vh;
@@ -38,12 +40,13 @@
 .Header .MuiAccordion-root .MuiAccordionDetails-root input {
   all: unset;
   text-decoration: underline gray;
-  margin: 0 0.3em 0;
+  margin: 0 0.5em 0;
   text-align: center;
-  font-family: "Inconsolata", monospace;
+  font-family: "Cutive Mono", monospace;
   max-width: 50vw;
   overflow: hidden;
   -moz-appearance: textfield;
+  font-size: 4vh;
 }
 .Header .MuiAccordion-root .MuiAccordionDetails-root input::-webkit-outer-spin-button, .Header .MuiAccordion-root .MuiAccordionDetails-root input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -62,9 +65,9 @@
 .Header .MuiAccordion-root .MuiAccordionDetails-root #radix-buttons button {
   width: 5vh;
   height: 5vh;
-  font-size: 2.7vh;
+  font-size: 3vh;
   margin: 5px;
-  font-family: "Inconsolata", monospace;
+  font-family: "Cutive Mono", monospace;
   border: none;
   color: white;
   border-radius: 50%;

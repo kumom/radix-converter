@@ -36,10 +36,6 @@ class App extends React.Component<{}, { [key: string]: any }> {
   render() {
     return (
       <div className="App">
-        <link
-          href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
-          rel="stylesheet"
-        ></link>
         <Header
           currentValue={this.state.currentValue}
           currentRadix={this.state.currentRadix}
