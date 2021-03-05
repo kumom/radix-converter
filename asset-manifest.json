@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/kumom/radix-converter/static/css/main.ab737e1c.chunk.css",
-    "main.js": "/kumom/radix-converter/static/js/main.ba134a3c.chunk.js",
-    "main.js.map": "/kumom/radix-converter/static/js/main.ba134a3c.chunk.js.map",
+    "main.css": "/kumom/radix-converter/static/css/main.d6a2f385.chunk.css",
+    "main.js": "/kumom/radix-converter/static/js/main.68c3059e.chunk.js",
+    "main.js.map": "/kumom/radix-converter/static/js/main.68c3059e.chunk.js.map",
     "runtime-main.js": "/kumom/radix-converter/static/js/runtime-main.b36a3f0d.js",
     "runtime-main.js.map": "/kumom/radix-converter/static/js/runtime-main.b36a3f0d.js.map",
     "static/js/2.936376ad.chunk.js": "/kumom/radix-converter/static/js/2.936376ad.chunk.js",
     "static/js/2.936376ad.chunk.js.map": "/kumom/radix-converter/static/js/2.936376ad.chunk.js.map",
     "index.html": "/kumom/radix-converter/index.html",
-    "static/css/main.ab737e1c.chunk.css.map": "/kumom/radix-converter/static/css/main.ab737e1c.chunk.css.map",
+    "static/css/main.d6a2f385.chunk.css.map": "/kumom/radix-converter/static/css/main.d6a2f385.chunk.css.map",
     "static/js/2.936376ad.chunk.js.LICENSE.txt": "/kumom/radix-converter/static/js/2.936376ad.chunk.js.LICENSE.txt",
     "static/media/expand.574638d6.svg": "/kumom/radix-converter/static/media/expand.574638d6.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.b36a3f0d.js",
     "static/js/2.936376ad.chunk.js",
-    "static/css/main.ab737e1c.chunk.css",
-    "static/js/main.ba134a3c.chunk.js"
+    "static/css/main.d6a2f385.chunk.css",
+    "static/js/main.68c3059e.chunk.js"
   ]
 }
