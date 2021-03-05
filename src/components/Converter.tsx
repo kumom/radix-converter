@@ -40,14 +40,14 @@ export default function Converter(props: {
             firstRadix={radix === firstRadix} updateValue={props.updateValue} />
           <div className="stepButtons" style={{ display: radix === editingRadix ? "block" : "none" }}>
             <button
-              style={{ backgroundColor: activeColor(radix), lineHeight: "0.8em" }}
+              style={{ backgroundColor: activeColor(radix) }}
               onMouseDown={event => { event.preventDefault() }}
               onClick={() => {
                 const newValue = value.plus(1);
                 props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
               }}>+</button>
             <button
-              style={{ backgroundColor: activeColor(radix), lineHeight: "0.5em" }}
+              style={{ backgroundColor: activeColor(radix) }}
               onMouseDown={event => { event.preventDefault() }}
               onClick={() => {
                 const newValue = value.minus(1);
