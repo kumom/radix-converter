@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import "../stylesheets/Header.css";
 import expandedIcon from "../assets/expand.svg";
 import githubLogo from "../assets/github.png";
-import { resize } from "../util/resize";
+import { activeColor, resize } from "../util";
 
 class Header extends React.Component<{ [key: string]: any }, { [key: string]: any }> {
   constructor(props: {
@@ -39,20 +39,18 @@ class Header extends React.Component<{ [key: string]: any }, { [key: string]: an
           }}
         >
           <AccordionSummary
-            aria-controls="header"
-            expandIcon={
-              <img id="expand-icon" src={expandedIcon} alt="expand"
-                style={{ filter: this.state.expanded ? "invert(80%)" : "none" }} />
-            }
           >
             <Title expanded={this.state.expanded} />
+            <img id="expand-icon" src={expandedIcon} alt="expand"
+              style={{
+                filter: this.state.expanded ? "invert(80%)" : "none",
+                transform: this.state.expanded ? "rotate(180deg)" : "none"
+              }} />
           </AccordionSummary>
           <AccordionDetails>
             <DecimalPlacesSetter decimalPlaces={this.props.decimalPlaces} updateDecimalPlaces={this.props.updateDecimalPlaces} />
-            <div id="set-radixes">
-              <div id="radix-buttons">
-                {radixButtons}
-              </div>
+            <div id="radix-buttons">
+              {radixButtons}
             </div>
           </AccordionDetails>
         </Accordion>
@@ -63,7 +61,6 @@ class Header extends React.Component<{ [key: string]: any }, { [key: string]: an
 
 function RadixButton(props: { radix: number, show: boolean, toggleVisibility: (radix: number) => void }) {
   const inactiveColor = "rgba(34,34,34,0.7)";
-  const activeColor = (radix: number) => `hsla(${radix * 10}, 70%, 40%, 0.6)`;
 
   return <button style={{ backgroundColor: props.show ? activeColor(props.radix) : inactiveColor }}
     onClick={() => { props.toggleVisibility(props.radix) }}>
@@ -72,23 +69,26 @@ function RadixButton(props: { radix: number, show: boolean, toggleVisibility: (r
 }
 
 function Title(props: { expanded: boolean }) {
-  return <div id="title">
-    Radix C
+  return <div>
+    <div id="title">
+      Radix <span style={{ display: "inline-block",  whiteSpace: "nowrap"}}>C
           <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://github.com/kumom/radix-converter"
-    >
-      <img
-        key="github"
-        src={githubLogo}
-        alt="github-logo"
-        id="github-logo"
-        style={{ filter: props.expanded ? "invert(80%)" : "none" }}
-      ></img>
-    </a>
-          nverter
-        </div>;
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/kumom/radix-converter"
+        >
+          <img
+            key="github"
+            src={githubLogo}
+            alt="github-logo"
+            id="github-logo"
+            style={{ filter: props.expanded ? "invert(80%)" : "none" }}
+          ></img>
+        </a>
+          nverter</span>
+    </div>
+  </div>
+    ;
 }
 
 function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces: (value: number) => void }) {
@@ -98,7 +98,7 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
 
   useEffect(() => {
     const el = decimalPlaceRef.current! as HTMLInputElement;
-    resize(el, 5, 0);
+    resize(el);
     window.addEventListener('resize', () => resize(el));
   })
 
@@ -113,6 +113,12 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
       onKeyDown={event => {
         if (event.key === "-" || event.key === ".")
           event.preventDefault();
+      }}
+      onBlur={event => {
+        if (!event.target.value) {
+          event.target.value = "0";
+          props.updateDecimalPlaces(0);
+        }
       }}
       onPaste={event => {
         const data = event.clipboardData.getData("text/plain");

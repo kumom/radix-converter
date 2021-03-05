@@ -7,18 +7,19 @@ class App extends React.Component<{}, { [key: string]: any }> {
   constructor(props: any) {
     super(props);
     this.toggleVisibility = this.toggleVisibility.bind(this);
-    this.changeValue = this.changeValue.bind(this);
+    this.updateValue = this.updateValue.bind(this);
     this.updateDecimalPlaces = this.updateDecimalPlaces.bind(this);
 
     this.state = {
       currentValue: 1024,
       currentRadix: 10,
+      editingRadix: 0,
       decimalPlaces: 10,
       mask: Array(37).fill(null).map((v, i) => [2, 8, 10, 16].includes(i))
     };
   }
 
-  changeValue(value: string, radix: number) {
+  updateValue(value: string, radix: number) {
     this.setState({ currentValue: value, currentRadix: radix });
   }
 
@@ -39,10 +40,6 @@ class App extends React.Component<{}, { [key: string]: any }> {
           href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
           rel="stylesheet"
         ></link>
-        <link
-          href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap"
-          rel="stylesheet"
-        ></link>
         <Header
           currentValue={this.state.currentValue}
           currentRadix={this.state.currentRadix}
@@ -56,7 +53,7 @@ class App extends React.Component<{}, { [key: string]: any }> {
           currentRadix={this.state.currentRadix}
           decimalPlaces={this.state.decimalPlaces}
           mask={this.state.mask}
-          changeValue={this.changeValue}
+          updateValue={this.updateValue}
         />
       </div>
     );

@@ -1,89 +1,95 @@
 @mixin for-all-vendor($property, $value) {
   -webkit-#{$property}: $value;
-  -ms-#{$property}: $value;
-  #{$property}: $value;
+  -ms-#{$property}    : $value;
+  #{$property}        : $value;
 }
 
 .Header {
-  width: 100%;
-  font-size: 45px;
+  width    : 100%;
+  font-size: 5vh;
 
-  .MuiAccordionDetails-root {
-    display: flex;
+  .MuiAccordion-root {
+    display       : flex;
     flex-direction: column;
-    font-size: 0.7em;
-    padding-bottom: 1em;
-  }
+    transition    : background-color 0.5s;
+    transition    : color 0.5s;
 
-  .MuiPaper-root {
-    transition: background-color 0.5s;
-    transition: color 0.5s;
-    padding: 0px 50px;
-  }
-}
+    .MuiAccordionSummary-root {
+      width  : 100%;
+      margin : 0;
+      padding: 0;
 
-#title {
-  text-align: center;
-  font-size: 1em;
+      .MuiAccordionSummary-content {
+        margin         : 1.5vh 5vw;
+        display        : flex;
+        flex-direction : row;
+        justify-content: space-between;
+        align-items    : center;
 
-  #github-logo {
-    display: inline-block;
-    width: 0.55em;
-    height: 0.55em;
-  }
-}
+        #title {
+          #github-logo {
+            display: inline-block;
+            width  : 0.55em;
+            height : 0.55em;
+          }
+        }
 
-#expand-icon {
-  height: 0.7em;
-}
-
-#set-radixes {
-  display: flex;
-  align-items: center;
-  margin-top: 0.5em;
-  margin-left: -0.2em;
-  
-
-  #radix-buttons {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  button {
-    width: 2em;
-    height: 2em;
-    font-size: calc(15px + 0.5vw);
-    margin: 5px;
-    font-family: "Inconsolata", monospace;
-    background-size: 100%;
-    border: none;
-    color: white;
-    text-align: center;
-    border-radius: 50%;
-    outline: 0;
-
-    &:hover {
-      cursor: pointer;
+        #expand-icon {
+          height: 2vh;
+        }
+      }
     }
-  }
-}
 
-input {
-  all: unset;
-  text-decoration: underline gray;
-  margin: 0 0.3em 0;
-  text-align: center;
-  font-family: "Inconsolata", monospace;
-  max-width: 50vw;
-  overflow: hidden;
-  // hide arrow
-  -moz-appearance: textfield;
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    @include for-all-vendor(appearance, none);
-  }
+    .MuiAccordionDetails-root {
+      display       : flex;
+      flex-direction: column;
+      font-size     : 0.7em;
+      padding       : 0;
+      margin        : 1vh 5vw 3vh 5vw;
 
-  &:focus {
-    outline: 0;
+      input {
+        all            : unset;
+        text-decoration: underline gray;
+        margin         : 0 0.3em 0;
+        text-align     : center;
+        font-family    : "Inconsolata", monospace;
+        max-width      : 50vw;
+        overflow       : hidden;
+        // hide arrow
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          @include for-all-vendor(appearance, none);
+        }
+
+        &:focus {
+          outline: 0;
+        }
+      }
+
+      #radix-buttons {
+        display  : flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin     : 1vh 0 0 -0.2em;
+
+        button {
+          width        : 5vh;
+          height       : 5vh;
+          font-size    : 2.7vh;
+          margin       : 5px;
+          font-family  : "Inconsolata", monospace;
+          border       : none;
+          color        : white;
+          border-radius: 50%;
+          outline      : 0;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 }

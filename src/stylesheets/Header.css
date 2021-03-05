@@ -1,61 +1,41 @@
 .Header {
   width: 100%;
-  font-size: 45px;
+  font-size: 5vh;
 }
-.Header .MuiAccordionDetails-root {
+.Header .MuiAccordion-root {
   display: flex;
   flex-direction: column;
-  font-size: 0.7em;
-  padding-bottom: 1em;
-}
-.Header .MuiPaper-root {
   transition: background-color 0.5s;
   transition: color 0.5s;
-  padding: 0px 50px;
 }
-
-#title {
-  text-align: center;
-  font-size: 1em;
+.Header .MuiAccordion-root .MuiAccordionSummary-root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
-#title #github-logo {
+.Header .MuiAccordion-root .MuiAccordionSummary-root .MuiAccordionSummary-content {
+  margin: 1.5vh 5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.Header .MuiAccordion-root .MuiAccordionSummary-root .MuiAccordionSummary-content #title #github-logo {
   display: inline-block;
   width: 0.55em;
   height: 0.55em;
 }
-
-#expand-icon {
-  height: 0.7em;
+.Header .MuiAccordion-root .MuiAccordionSummary-root .MuiAccordionSummary-content #expand-icon {
+  height: 2vh;
 }
-
-#set-radixes {
+.Header .MuiAccordion-root .MuiAccordionDetails-root {
   display: flex;
-  align-items: center;
-  margin-top: 0.5em;
-  margin-left: -0.2em;
+  flex-direction: column;
+  font-size: 0.7em;
+  padding: 0;
+  margin: 1vh 5vw 3vh 5vw;
 }
-#set-radixes #radix-buttons {
-  display: flex;
-  flex-wrap: wrap;
-}
-#set-radixes button {
-  width: 2em;
-  height: 2em;
-  font-size: calc(15px + 0.5vw);
-  margin: 5px;
-  font-family: "Inconsolata", monospace;
-  background-size: 100%;
-  border: none;
-  color: white;
-  text-align: center;
-  border-radius: 50%;
-  outline: 0;
-}
-#set-radixes button:hover {
-  cursor: pointer;
-}
-
-input {
+.Header .MuiAccordion-root .MuiAccordionDetails-root input {
   all: unset;
   text-decoration: underline gray;
   margin: 0 0.3em 0;
@@ -65,13 +45,33 @@ input {
   overflow: hidden;
   -moz-appearance: textfield;
 }
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+.Header .MuiAccordion-root .MuiAccordionDetails-root input::-webkit-outer-spin-button, .Header .MuiAccordion-root .MuiAccordionDetails-root input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   -ms-appearance: none;
   appearance: none;
 }
-input:focus {
+.Header .MuiAccordion-root .MuiAccordionDetails-root input:focus {
   outline: 0;
+}
+.Header .MuiAccordion-root .MuiAccordionDetails-root #radix-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1vh 0 0 -0.2em;
+}
+.Header .MuiAccordion-root .MuiAccordionDetails-root #radix-buttons button {
+  width: 5vh;
+  height: 5vh;
+  font-size: 2.7vh;
+  margin: 5px;
+  font-family: "Inconsolata", monospace;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  outline: 0;
+}
+.Header .MuiAccordion-root .MuiAccordionDetails-root #radix-buttons button:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=Header.css.map */

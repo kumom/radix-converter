@@ -1,70 +1,83 @@
 @mixin for-all-vendor($property, $value) {
   -webkit-#{$property}: $value;
-  -ms-#{$property}: $value;
-  #{$property}: $value;
+  -ms-#{$property}    : $value;
+  #{$property}        : $value;
 }
 
 .Converter {
-  display: flex;
+  display       : flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  margin-left: 30px;
-  width: 100vw;
+  align-items   : flex-start;
+  position      : relative;
+  width         : 100%;
+  margin        : 3vh 0;
 
-  .converter-item {
-    font-size: 40px;
+  .number-line {
+    width         : 100%;
+    font-size     : 5vh;
+    padding       : 0 5vw;
+    display       : flex;
+    flex-direction: row;
+    flex-wrap     : wrap;
+
+    .equal-sign {
+      font-family : "Montserrat", sans-serif;
+      font-size   : 1em;
+      margin-right: 0.2em;
+    }
+
+    .number-container {
+      display        : flex;
+      flex-direction : row;
+      align-items    : flex-end;
+      justify-content: flex-start;
+
+      .number:focus {
+        text-shadow    : 0px 2px 2px;
+        text-decoration: underline;
+      }
+
+      .number {
+        border   : none;
+        overflow : hidden;
+        outline  : none;
+        resize   : none;
+        max-width: 70vw;
+        @include for-all-vendor(box-shadow, none);
+        white-space: pre-wrap;
+        word-wrap  : break-word;
+        font-family: "Montserrat", sans-serif;
+        font-size  : 1em;
+      }
+
+      .radix {
+        display  : table-cell;
+        font-size: 0.5em;
+      }
+    }
+
+    .stepButtons {
+      display       : flex;
+      flex-direction: row;
+      margin        : auto 0 auto auto;
+
+      button {
+        border          : none;
+        background-color: rgb(80, 80, 80);
+        font-family     : "Montserrat", sans-serif;
+        font-weight     : 500;
+        color           : white;
+        border-radius   : 60%;
+        outline         : 0;
+        width           : 4.5vh;
+        height          : 4.5vh;
+        font-size       : 3.8vh;
+        margin          : 5px 0 5px 10px;
+      }
+
+      button:hover {
+        cursor: pointer;
+      }
+    }
   }
-}
-
-.equals-number {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.number-container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-start;
-
-  .number:focus {
-    text-shadow: 0px 2px 2px;
-    text-decoration: underline;
-  }
-
-  .number {
-    border: none;
-    overflow: hidden;
-    outline: none;
-    resize: none;
-    max-width: 70vw;
-    @include for-all-vendor(box-shadow, none);
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-
-  .radix {
-    display: table-cell;
-    font-size: 0.5em;
-  }
-}
-
-.number,.equal-sign {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1em;
-}
-
-.equal-sign {
-  margin-right: 0.3em;
-}
-
-.input-validity {
-  display: flex;
-  flex-direction: row;
-  font-size: 0.7em;
-  color: rgba(227, 36, 36, 0.8);
-  margin-left: 0.3em;
 }
