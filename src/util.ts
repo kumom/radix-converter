@@ -27,7 +27,7 @@ export function resize(node: HTMLElement | HTMLInputElement | null) {
     sizeHelper.style.maxWidth = styles.getPropertyValue("max-width");
     sizeHelper.style.maxHeight = styles.getPropertyValue("max-height");
   
-    const width = sizeHelper.offsetWidth + Math.floor(sizeHelper.offsetWidth / content.length);
+    const width = sizeHelper.offsetWidth + 10;
     const height = sizeHelper.offsetHeight;
   
     document.body.removeChild(sizeHelper);
