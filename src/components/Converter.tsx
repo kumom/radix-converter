@@ -84,7 +84,7 @@ function NumberContainer(props: {
 
 const NumberContainerMemo = React.memo(NumberContainer, (props, nextProps) => {
   const editing = props.radix === nextProps.currentRadix;
-  const stepButtonPossiblyClicked = document.activeElement &&
-                                    document.activeElement.tagName === "BUTTON";
-  return editing && !stepButtonPossiblyClicked;
+  const buttonClicked = document.activeElement &&
+                        document.activeElement.tagName === "BUTTON";
+  return editing && !buttonClicked;
 });
