@@ -3,7 +3,7 @@ import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core
 import "../stylesheets/Header.css";
 import expandedIcon from "../assets/expand.svg";
 import githubLogo from "../assets/github.png";
-import { activeColor, resize } from "../util";
+import { activeColor } from "../util";
 
 export default class Header extends React.Component<{ [key: string]: any }, { [key: string]: any }> {
   constructor(props: {
@@ -48,7 +48,7 @@ export default class Header extends React.Component<{ [key: string]: any }, { [k
               }} />
           </AccordionSummary>
           <AccordionDetails>
-            <DecimalPlacesSetter decimalPlaces={this.props.decimalPlaces} updateDecimalPlaces={this.props.updateDecimalPlaces} />
+            <DecimalPlacesSetterMemo decimalPlaces={this.props.decimalPlaces} updateDecimalPlaces={this.props.updateDecimalPlaces} />
             <div id="radix-buttons">
               {radixButtons}
             </div>
@@ -93,57 +93,49 @@ function Title(props: { expanded: boolean }) {
 
 function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces: (value: number) => void }) {
   let prevDecimalPlaces: number = props.decimalPlaces;
-  const decimalPlaceRef = useRef(null);
   const [outOfRange, setOutOfRange] = useState(false);
-  let subscribeToResize = false;
-
-  useEffect(() => {
-    const node = decimalPlaceRef.current! as HTMLInputElement;
-    resize(node);
-    if (!subscribeToResize)
-      window.addEventListener('resize', () => resize(node));
-  })
 
   return <div>
-    Show
-      <input
-      ref={decimalPlaceRef}
-      type="number"
-      defaultValue={props.decimalPlaces}
-      min="0"
-      max="65000"
-      onKeyDown={event => {
-        if (event.key === "-" || event.key === ".")
-          event.preventDefault();
-      }}
-      onBlur={event => {
-        if (!event.target.value) {
-          event.target.value = "0";
-          props.updateDecimalPlaces(0);
-        }
-      }}
-      onPaste={event => {
-        const data = event.clipboardData.getData("text/plain");
-        if (!/^\d+$/.test(data)) {
-          event.preventDefault();
-          props.updateDecimalPlaces(prevDecimalPlaces);
-        }
-      }}
-      onChange={event => {
-        if (/^\d+$/.test(event.target.value)) {
-          const value = Number(event.target.value);
-          if (value <= 65000) {
-            props.updateDecimalPlaces(value);
-            prevDecimalPlaces = value;
-            setOutOfRange(false);
+    <span style={{ display: "flex", flexDirection:"row" }}>Show
+      <div
+        id="decimal-places"
+        contentEditable={true}
+        suppressContentEditableWarning={true}
+        onKeyDown={event => {
+          if (event.key === "-" || event.key === ".")
+            event.preventDefault();
+        }}
+        onBlur={event => {
+          if (!event.target.innerText) {
+            event.target.innerText = "0";
+            props.updateDecimalPlaces(0);
           }
-          else {
-            props.updateDecimalPlaces(65000);
-            setOutOfRange(true);
+        }}
+        onPaste={event => {
+          const data = event.clipboardData.getData("text/plain");
+          if (!/^\d+$/.test(data)) {
+            event.preventDefault();
+            props.updateDecimalPlaces(prevDecimalPlaces);
           }
-        }
-      }}
-    ></input>decimal {props.decimalPlaces <= 1 ? "digit" : "digits"}
+        }}
+        onInput={(event: React.ChangeEvent<HTMLDivElement>) => {
+          if (/^\d+$/.test(event.target.innerText)) {
+            const value = Number(event.target.innerText);
+            if (value <= 65000) {
+              props.updateDecimalPlaces(value);
+              prevDecimalPlaces = value;
+              setOutOfRange(false);
+            }
+            else {
+              props.updateDecimalPlaces(65000);
+              setOutOfRange(true);
+            }
+          }
+        }}
+      >
+        {props.decimalPlaces}
+      </div>decimal {props.decimalPlaces <= 1 ? "digit" : "digits"}
+    </span>
     <div style={{
       marginTop: "5px",
       fontSize: "80%",
@@ -152,3 +144,6 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
     }}>(OUT OF RANGE: maximum is 65000)</div>
   </div>;
 }
+
+
+const DecimalPlacesSetterMemo = React.memo(DecimalPlacesSetter, (props, nextProps) => true);

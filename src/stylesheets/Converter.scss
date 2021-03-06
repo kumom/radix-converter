@@ -41,7 +41,6 @@
         border   : none;
         overflow : hidden;
         outline  : none;
-        resize   : none;
         max-width: 70vw;
         @include for-all-vendor(box-shadow, none);
         white-space: pre-wrap;
@@ -53,6 +52,7 @@
       .radix {
         display  : table-cell;
         font-size: 0.5em;
+        margin-left: 5px;
       }
     }
 

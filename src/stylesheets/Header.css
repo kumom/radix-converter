@@ -37,30 +37,27 @@
   padding: 0;
   margin: 1vh 5vw 2.5vh 5vw;
 }
-.Header .MuiAccordion-root .MuiAccordionDetails-root input {
-  all: unset;
-  text-decoration: underline gray;
-  margin: 0 0.5em 0;
-  text-align: center;
+.Header .MuiAccordion-root .MuiAccordionDetails-root #decimal-places {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.5em;
+  padding: 0 5px;
+  border-bottom: solid 1px;
   font-family: "Cutive Mono", monospace;
-  max-width: 50vw;
+  max-width: 40vw;
   overflow: hidden;
-  -moz-appearance: textfield;
-  font-size: 4vh;
+  text-overflow: clip;
+  white-space: nowrap;
 }
-.Header .MuiAccordion-root .MuiAccordionDetails-root input::-webkit-outer-spin-button, .Header .MuiAccordion-root .MuiAccordionDetails-root input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-}
-.Header .MuiAccordion-root .MuiAccordionDetails-root input:focus {
+.Header .MuiAccordion-root .MuiAccordionDetails-root #decimal-places:focus {
   outline: 0;
 }
 .Header .MuiAccordion-root .MuiAccordionDetails-root #radix-buttons {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin: 1vh 0 0 -0.2em;
+  margin: 2vh 0 0 -0.2em;
 }
 .Header .MuiAccordion-root .MuiAccordionDetails-root #radix-buttons button {
   width: 5.2vh;
