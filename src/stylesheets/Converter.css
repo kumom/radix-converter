@@ -26,8 +26,8 @@
   justify-content: flex-start;
 }
 .Converter .number-line .number-container .number:focus {
-  text-shadow: 0px 2px 2px;
-  border-bottom: solid 2px;
+  text-shadow: 0 0.04em 0.04em;
+  border-bottom: solid 0.04em;
 }
 .Converter .number-line .number-container .number {
   border: none;
