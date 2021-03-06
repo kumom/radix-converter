@@ -4,7 +4,6 @@ import "../stylesheets/Header.css";
 import expandedIcon from "../assets/expand.svg";
 import githubLogo from "../assets/github.png";
 import { activeColor } from "../util";
-import BigNumber from "bignumber.js";
 
 export default function Header(props: {
   decimalPlaces: number,
@@ -120,6 +119,9 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
             setOutOfRange(value > 65000);
             props.updateDecimalPlaces(value);
             setPlurality(value > 1);
+          } else if (!event.target.innerText) {
+            props.updateDecimalPlaces(0);
+            setPlurality(false);
           }
         }}
       >

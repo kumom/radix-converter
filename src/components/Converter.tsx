@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BigNumber from "bignumber.js";
 import "../stylesheets/Converter.css";
 import { activeColor } from "../util";
@@ -10,7 +10,6 @@ export default function Converter(props: {
   mask: boolean[],
   updateValue: (v: string, radix: number) => void
 }) {
-  const [editingRadix, setEditingRadix] = useState(2);
 
   BigNumber.set({ DECIMAL_PLACES: props.decimalPlaces })
 
@@ -23,12 +22,13 @@ export default function Converter(props: {
         const valueStr: string = radix === props.currentRadix ? props.currentValue : value.toString(radix);
 
         return <div key={radix} className="number-line"
-          onFocus={() => { setEditingRadix(radix) }}
+        // onFocus={() => { setEditingRadix(radix) }}
         >
-          <span className="equal-sign" style={{ visibility: editingRadix === radix ? "hidden" : "visible" }}>=</span>
-          <NumberContainerMemo value={valueStr} radix={radix} editing={editingRadix === radix}
+          <span className="equal-sign" style={{ visibility: props.currentRadix === radix ? "hidden" : "visible" }}>=</span>
+          <NumberContainerMemo value={valueStr} radix={radix}
+            currentRadix={props.currentRadix}
             updateValue={props.updateValue} />
-          <div className="stepButtons" style={{ display: radix === editingRadix ? "block" : "none" }}>
+          <div className="stepButtons" style={{ display: radix === props.currentRadix ? "block" : "none" }}>
             <button
               style={{ backgroundColor: activeColor(radix) }}
               onMouseDown={event => { event.preventDefault() }}
@@ -51,7 +51,8 @@ export default function Converter(props: {
 }
 
 function NumberContainer(props: {
-  value: string, radix: number, editing: boolean,
+  value: string, radix: number,
+  currentRadix: number,
   updateValue: (v: string, radix: number) => void
 }) {
 
@@ -81,4 +82,4 @@ function NumberContainer(props: {
   </div>;
 }
 
-const NumberContainerMemo = React.memo(NumberContainer, (props, nextProps) => nextProps.editing);
+const NumberContainerMemo = React.memo(NumberContainer, (props, nextProps) => props.radix === nextProps.currentRadix);

@@ -11,8 +11,8 @@ export default class App extends React.Component<{}, { [key: string]: any }> {
     this.updateDecimalPlaces = this.updateDecimalPlaces.bind(this);
 
     this.state = {
-      currentValue: 1024,
-      currentRadix: 10,
+      currentValue: "10000000000",
+      currentRadix: 2,
       decimalPlaces: 10,
       mask: Array(37).fill(null).map((v, i) => [2, 8, 10, 16].includes(i))
     };
