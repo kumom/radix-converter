@@ -3,7 +3,7 @@ import Converter from "./Converter";
 import Header from "./Header";
 import "../stylesheets/App.css";
 
-class App extends React.Component<{}, { [key: string]: any }> {
+export default class App extends React.Component<{}, { [key: string]: any }> {
   constructor(props: any) {
     super(props);
     this.toggleVisibility = this.toggleVisibility.bind(this);
@@ -13,7 +13,6 @@ class App extends React.Component<{}, { [key: string]: any }> {
     this.state = {
       currentValue: 1024,
       currentRadix: 10,
-      editingRadix: 0,
       decimalPlaces: 10,
       mask: Array(37).fill(null).map((v, i) => [2, 8, 10, 16].includes(i))
     };
@@ -55,5 +54,3 @@ class App extends React.Component<{}, { [key: string]: any }> {
     );
   }
 }
-
-export default App;

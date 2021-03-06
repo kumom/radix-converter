@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import BigNumber from "bignumber.js";
 import "../stylesheets/Converter.css";
-import { activeColor, resize } from "../util";
+import { activeColor } from "../util";
 
 export default function Converter(props: {
   currentValue: string
@@ -30,14 +30,13 @@ export default function Converter(props: {
         const value: BigNumber = new BigNumber(props.currentValue, props.currentRadix);
         const valueStr: string = value.toString(radix);
         const showValue: string = radix === props.currentRadix ? props.currentValue : valueStr;
-        const valid: boolean = radix !== props.currentRadix || valueStr !== 'NaN';
 
         return <div key={radix} className="number-line"
           onFocus={() => { setEditingRadix(radix) }}
           onBlur={() => { setEditingRadix(0) }}>
           <span className="equal-sign" style={{ visibility: firstRadix === radix ? "hidden" : "visible" }}>=</span>
-          <NumberContainer value={showValue} radix={radix}
-            firstRadix={radix === firstRadix} updateValue={props.updateValue} />
+          <NumberContainerMemo value={showValue} radix={radix} editing={editingRadix === radix}
+            updateValue={props.updateValue} />
           <div className="stepButtons" style={{ display: radix === editingRadix ? "block" : "none" }}>
             <button
               style={{ backgroundColor: activeColor(radix) }}
@@ -60,27 +59,20 @@ export default function Converter(props: {
   </div>;
 }
 
-function NumberContainer(
-  props: {
-    value: string, radix: number, firstRadix: boolean
-    updateValue: (v: string, radix: number) => void
-  }) {
-  const unfocusedColor = "rgba(10, 10, 10, 0.82)";
-  let subscribeToResize = false;
+function NumberContainer(props: {
+  value: string, radix: number, editing: boolean,
+  updateValue: (v: string, radix: number) => void
+}) {
 
-  const setDimension = useCallback((node: HTMLTextAreaElement | null) => {
-    if (!node) return;
-    resize(node);
-    if (!subscribeToResize)
-      window.addEventListener('resize', () => resize(node));
-  }, [props.value])
+  const unfocusedColor = "rgba(10, 10, 10, 0.82)";
 
   return <div className="number-container">
-    <textarea
+    <div
       className="number"
-      ref={setDimension}
-      onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateValue(event.target.value, props.radix);
+      contentEditable={true}
+      suppressContentEditableWarning={true}
+      onInput={(event: React.ChangeEvent<HTMLDivElement>) => {
+        props.updateValue(event.target.innerText, props.radix);
       }}
       onFocus={event => {
         event.target.style.color = `hsla(${props.radix * 10}, 70%, 40%, 0.6)`;
@@ -90,10 +82,11 @@ function NumberContainer(
         if (props.value === "")
           props.updateValue("0", props.radix);
       }}
-      style={{ color: unfocusedColor }}
-      spellCheck={false}
-      value={props.value}
-    />
+      style={{ color: unfocusedColor }}>
+      {props.value}
+    </div>
     <span className="radix">{props.radix}</span>
   </div>;
 }
+
+const NumberContainerMemo = React.memo(NumberContainer, (props, nextProps) => nextProps.editing);

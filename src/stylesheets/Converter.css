@@ -27,7 +27,7 @@
 }
 .Converter .number-line .number-container .number:focus {
   text-shadow: 0px 2px 2px;
-  text-decoration: underline;
+  border-bottom: solid 2px;
 }
 .Converter .number-line .number-container .number {
   border: none;

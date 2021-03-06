@@ -5,7 +5,7 @@ import expandedIcon from "../assets/expand.svg";
 import githubLogo from "../assets/github.png";
 import { activeColor, resize } from "../util";
 
-class Header extends React.Component<{ [key: string]: any }, { [key: string]: any }> {
+export default class Header extends React.Component<{ [key: string]: any }, { [key: string]: any }> {
   constructor(props: {
     decimalPlaces: number,
     mask: boolean[],
@@ -152,5 +152,3 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
     }}>(OUT OF RANGE: maximum is 65000)</div>
   </div>;
 }
-
-export default Header;
