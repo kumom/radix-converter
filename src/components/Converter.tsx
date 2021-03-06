@@ -62,6 +62,7 @@ function NumberContainer(props: {
     <div
       className="number"
       spellCheck={false}
+      tabIndex={1}
       contentEditable={true}
       suppressContentEditableWarning={true}
       onInput={(event: React.ChangeEvent<HTMLDivElement>) => {

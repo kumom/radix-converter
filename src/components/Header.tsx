@@ -23,7 +23,7 @@ export default function Header(props: {
   });
 
   return (
-    <div className="Header">
+    <div className="Header" tabIndex={-1}>
       <Accordion
         style={{
           backgroundColor: expanded ? "rgba(10,10,10,0.8)" : "rgba(250,250,250,0.8)",
@@ -34,6 +34,7 @@ export default function Header(props: {
         }}
       >
         <AccordionSummary
+          tabIndex={-1}
         >
           <Title expanded={expanded} />
           <img id="expand-icon" src={expandedIcon} alt="expand"
@@ -67,6 +68,7 @@ function Title(props: { expanded: boolean }) {
     <div id="title">
       Radix <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>C
           <a
+          tabIndex={-1}
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/kumom/radix-converter"
