@@ -93,6 +93,7 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
     <span style={{ display: "flex", flexDirection: "row" }}>Show
       <div
         id="decimal-places"
+        spellCheck={false}
         contentEditable={true}
         suppressContentEditableWarning={true}
         onKeyDown={event => {

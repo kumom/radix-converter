@@ -69,6 +69,7 @@ function NumberContainer(props: {
   return <div className="number-container">
     <div
       className="number"
+      spellCheck={false}
       contentEditable={true}
       suppressContentEditableWarning={true}
       onInput={(event: React.ChangeEvent<HTMLDivElement>) => {
