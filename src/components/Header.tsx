@@ -4,6 +4,7 @@ import "../stylesheets/Header.css";
 import expandedIcon from "../assets/expand.svg";
 import githubLogo from "../assets/github.png";
 import { activeColor } from "../util";
+import BigNumber from "bignumber.js";
 
 export default function Header(props: {
   decimalPlaces: number,
@@ -86,51 +87,45 @@ function Title(props: { expanded: boolean }) {
 }
 
 function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces: (value: number) => void }) {
-  let prevDecimalPlaces: number = props.decimalPlaces;
   const [outOfRange, setOutOfRange] = useState(false);
+  const [plurality, setPlurality] = useState(props.decimalPlaces > 1);
 
   return <div>
-    <span style={{ display: "flex", flexDirection: "row" }}>Show
+    <div id="decimal-places-prompt">Show
       <div
         id="decimal-places"
         spellCheck={false}
         contentEditable={true}
         suppressContentEditableWarning={true}
         onKeyDown={event => {
-          if (event.key === "-" || event.key === ".")
+          if (event.key === "-" || event.key === "."
+            || (event.key !== "Backspace" &&
+              event.key !== "ArrowRight" &&
+              event.key !== "ArrowLeft" &&
+              !/^\d$/.test(event.key)))
             event.preventDefault();
         }}
         onBlur={event => {
           if (!event.target.innerText) {
             event.target.innerText = "0";
             props.updateDecimalPlaces(0);
+            setPlurality(false);
           }
         }}
-        onPaste={event => {
-          const data = event.clipboardData.getData("text/plain");
-          if (!/^\d+$/.test(data)) {
-            event.preventDefault();
-            props.updateDecimalPlaces(prevDecimalPlaces);
-          }
-        }}
+        onPaste={event => { event.preventDefault() }}
         onInput={(event: React.ChangeEvent<HTMLDivElement>) => {
           if (/^\d+$/.test(event.target.innerText)) {
-            const value = Number(event.target.innerText);
-            if (value <= 65000) {
-              props.updateDecimalPlaces(value);
-              prevDecimalPlaces = value;
-              setOutOfRange(false);
-            }
-            else {
-              props.updateDecimalPlaces(65000);
-              setOutOfRange(true);
-            }
+            let value = Number(event.target.innerText);
+            value = value > 65000 ? 65000 : value;
+            setOutOfRange(value > 65000);
+            props.updateDecimalPlaces(value);
+            setPlurality(value > 1);
           }
         }}
       >
         {props.decimalPlaces}
-      </div>decimal {props.decimalPlaces <= 1 ? "digit" : "digits"}
-    </span>
+      </div> decimal {plurality ? "digits" : "digit"}
+    </div>
     <div style={{
       marginTop: "5px",
       fontSize: "80%",

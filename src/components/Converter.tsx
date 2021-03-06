@@ -10,15 +10,7 @@ export default function Converter(props: {
   mask: boolean[],
   updateValue: (v: string, radix: number) => void
 }) {
-  const [editingRadix, setEditingRadix] = useState(0);
-
-  let firstRadix: number = 2;
-  for (let i = 2; i <= 36; i++) {
-    if (props.mask[i]) {
-      firstRadix = i;
-      break;
-    }
-  }
+  const [editingRadix, setEditingRadix] = useState(2);
 
   BigNumber.set({ DECIMAL_PLACES: props.decimalPlaces })
 
@@ -28,14 +20,13 @@ export default function Converter(props: {
         if (radix < 2 || !props.mask[radix]) return null;
 
         const value: BigNumber = new BigNumber(props.currentValue, props.currentRadix);
-        const valueStr: string = value.toString(radix);
-        const showValue: string = radix === props.currentRadix ? props.currentValue : valueStr;
+        const valueStr: string = radix === props.currentRadix ? props.currentValue : value.toString(radix);
 
         return <div key={radix} className="number-line"
           onFocus={() => { setEditingRadix(radix) }}
-          onBlur={() => { setEditingRadix(0) }}>
-          <span className="equal-sign" style={{ visibility: firstRadix === radix ? "hidden" : "visible" }}>=</span>
-          <NumberContainerMemo value={showValue} radix={radix} editing={editingRadix === radix}
+        >
+          <span className="equal-sign" style={{ visibility: editingRadix === radix ? "hidden" : "visible" }}>=</span>
+          <NumberContainerMemo value={valueStr} radix={radix} editing={editingRadix === radix}
             updateValue={props.updateValue} />
           <div className="stepButtons" style={{ display: radix === editingRadix ? "block" : "none" }}>
             <button

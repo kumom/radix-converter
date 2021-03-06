@@ -37,11 +37,17 @@
   padding: 0;
   margin: 1vh 5vw 2.5vh 5vw;
 }
-.Header .MuiAccordion-root .MuiAccordionDetails-root #decimal-places {
+.Header .MuiAccordion-root .MuiAccordionDetails-root #decimal-places-prompt {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.Header .MuiAccordion-root .MuiAccordionDetails-root #decimal-places-prompt #decimal-places {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0.5em;
+  margin: -0.1em 0.5em 0 0.5em;
   padding: 0 5px;
   border-bottom: solid 1px;
   max-width: 40vw;
@@ -49,7 +55,7 @@
   text-overflow: clip;
   white-space: nowrap;
 }
-.Header .MuiAccordion-root .MuiAccordionDetails-root #decimal-places:focus {
+.Header .MuiAccordion-root .MuiAccordionDetails-root #decimal-places-prompt #decimal-places:focus {
   outline: 0;
 }
 .Header .MuiAccordion-root .MuiAccordionDetails-root #radix-buttons {

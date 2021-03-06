@@ -43,20 +43,27 @@
       padding       : 0;
       margin        : 1vh 5vw 2.5vh 5vw;
 
-      #decimal-places {
-        display        : flex;
-        justify-content: center;
-        align-items    : center;
-        margin         : 0 0.5em;
-        padding        : 0 5px;
-        border-bottom  : solid 1px;
-        max-width      : 40vw;
-        overflow       : hidden;
-        text-overflow  : clip;
-        white-space    : nowrap;
+      #decimal-places-prompt {
+        display       : flex;
+        flex-direction: row;
+        flex-wrap     : wrap;
+        width         : 100%;
 
-        &:focus {
-          outline: 0;
+        #decimal-places {
+          display        : flex;
+          justify-content: center;
+          align-items    : center;
+          margin         : -0.1em 0.5em 0 0.5em;
+          padding        : 0 5px;
+          border-bottom  : solid 1px;
+          max-width      : 40vw;
+          overflow       : hidden;
+          text-overflow  : clip;
+          white-space    : nowrap;
+
+          &:focus {
+            outline: 0;
+          }
         }
       }
 
