@@ -21,9 +21,7 @@ export default function Converter(props: {
         const value: BigNumber = new BigNumber(props.currentValue, props.currentRadix);
         const valueStr: string = radix === props.currentRadix ? props.currentValue : value.toString(radix);
 
-        return <div key={radix} className="number-line"
-        // onFocus={() => { setEditingRadix(radix) }}
-        >
+        return <div key={radix} className="number-line">
           <span className="equal-sign" style={{ visibility: props.currentRadix === radix ? "hidden" : "visible" }}>=</span>
           <NumberContainerMemo value={valueStr} radix={radix}
             currentRadix={props.currentRadix}
@@ -32,14 +30,16 @@ export default function Converter(props: {
             <button
               style={{ backgroundColor: activeColor(radix) }}
               onMouseDown={event => { event.preventDefault() }}
-              onClick={() => {
+              onClick={event => {
+                (event.target as HTMLButtonElement).focus();
                 const newValue = value.plus(1);
                 props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
               }}>+</button>
             <button
               style={{ backgroundColor: activeColor(radix) }}
               onMouseDown={event => { event.preventDefault() }}
-              onClick={() => {
+              onClick={event => {
+                (event.target as HTMLButtonElement).focus();
                 const newValue = value.minus(1);
                 props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
               }}>-</button>
@@ -82,4 +82,9 @@ function NumberContainer(props: {
   </div>;
 }
 
-const NumberContainerMemo = React.memo(NumberContainer, (props, nextProps) => props.radix === nextProps.currentRadix);
+const NumberContainerMemo = React.memo(NumberContainer, (props, nextProps) => {
+  const editing = props.radix === nextProps.currentRadix;
+  const stepButtonPossiblyClicked = document.activeElement &&
+                                    document.activeElement.tagName === "BUTTON";
+  return editing && !stepButtonPossiblyClicked;
+});
