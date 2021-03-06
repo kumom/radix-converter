@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useState } from "react";
 import BigNumber from "bignumber.js";
 import "../stylesheets/Converter.css";
 import { activeColor } from "../util";

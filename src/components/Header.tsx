@@ -1,62 +1,56 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import "../stylesheets/Header.css";
 import expandedIcon from "../assets/expand.svg";
 import githubLogo from "../assets/github.png";
 import { activeColor } from "../util";
 
-export default class Header extends React.Component<{ [key: string]: any }, { [key: string]: any }> {
-  constructor(props: {
-    decimalPlaces: number,
-    mask: boolean[],
-    currentValue: string,
-    currentRadix: number,
-    toggleVisibility: (radix: number) => void,
-    updateDecimalPlaces: (val: number) => void
-  }) {
-    super(props);
-    this.state = {
-      expanded: false
-    }
-  }
+export default function Header(props: {
+  decimalPlaces: number,
+  mask: boolean[],
+  currentValue: string,
+  currentRadix: number,
+  toggleVisibility: (radix: number) => void,
+  updateDecimalPlaces: (val: number) => void
+}) {
 
-  render() {
-    let radixButtons: JSX.Element[] = [];
-    Array(37).fill(null).forEach((v: any, i: number) => {
-      if (i < 2) return;
-      radixButtons.push(<RadixButton key={i} radix={i} show={this.props.mask[i]} toggleVisibility={this.props.toggleVisibility} />);
-    });
+  const [expanded, setExpanded] = useState(false);
 
-    return (
-      <div className="Header">
-        <Accordion
-          style={{
-            backgroundColor: this.state.expanded ? "rgba(10,10,10,0.8)" : "rgba(250,250,250,0.8)",
-            color: this.state.expanded ? "rgba(250,250,250,0.8)" : "rgba(10,10,10,0.8)"
-          }}
-          onChange={(_, expanded) => {
-            this.setState({ expanded })
-          }}
+  let radixButtons: JSX.Element[] = [];
+  Array(37).fill(null).forEach((v: any, i: number) => {
+    if (i < 2) return;
+    radixButtons.push(<RadixButton key={i} radix={i} show={props.mask[i]} toggleVisibility={props.toggleVisibility} />);
+  });
+
+  return (
+    <div className="Header">
+      <Accordion
+        style={{
+          backgroundColor: expanded ? "rgba(10,10,10,0.8)" : "rgba(250,250,250,0.8)",
+          color: expanded ? "rgba(250,250,250,0.8)" : "rgba(10,10,10,0.8)"
+        }}
+        onChange={(_, expanded) => {
+          setExpanded(expanded);
+        }}
+      >
+        <AccordionSummary
         >
-          <AccordionSummary
-          >
-            <Title expanded={this.state.expanded} />
-            <img id="expand-icon" src={expandedIcon} alt="expand"
-              style={{
-                filter: this.state.expanded ? "invert(80%)" : "none",
-                transform: this.state.expanded ? "rotate(180deg)" : "none"
-              }} />
-          </AccordionSummary>
-          <AccordionDetails>
-            <DecimalPlacesSetterMemo decimalPlaces={this.props.decimalPlaces} updateDecimalPlaces={this.props.updateDecimalPlaces} />
-            <div id="radix-buttons">
-              {radixButtons}
-            </div>
-          </AccordionDetails>
-        </Accordion>
-      </div>
-    );
-  }
+          <Title expanded={expanded} />
+          <img id="expand-icon" src={expandedIcon} alt="expand"
+            style={{
+              filter: expanded ? "invert(80%)" : "none",
+              transform: expanded ? "rotate(180deg)" : "none"
+            }} />
+        </AccordionSummary>
+        <AccordionDetails>
+          <DecimalPlacesSetterMemo decimalPlaces={props.decimalPlaces} updateDecimalPlaces={props.updateDecimalPlaces} />
+          <div id="radix-buttons">
+            {radixButtons}
+          </div>
+        </AccordionDetails>
+      </Accordion>
+    </div>
+  );
 }
 
 function RadixButton(props: { radix: number, show: boolean, toggleVisibility: (radix: number) => void }) {
@@ -96,7 +90,7 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
   const [outOfRange, setOutOfRange] = useState(false);
 
   return <div>
-    <span style={{ display: "flex", flexDirection:"row" }}>Show
+    <span style={{ display: "flex", flexDirection: "row" }}>Show
       <div
         id="decimal-places"
         contentEditable={true}
@@ -145,5 +139,4 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
   </div>;
 }
 
-
-const DecimalPlacesSetterMemo = React.memo(DecimalPlacesSetter, (props, nextProps) => true);
+const DecimalPlacesSetterMemo = React.memo(DecimalPlacesSetter, () => true);

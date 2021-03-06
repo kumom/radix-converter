@@ -1,9 +1,3 @@
-@mixin for-all-vendor($property, $value) {
-  -webkit-#{$property}: $value;
-  -ms-#{$property}    : $value;
-  #{$property}        : $value;
-}
-
 .Header {
   width      : 100%;
   font-size  : 6vh;
