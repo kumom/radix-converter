@@ -8,7 +8,7 @@
 }
 .Converter .number-line {
   width: 100%;
-  font-size: 6vh;
+  font-size: 7vmin;
   padding: 0 5vw;
   display: flex;
   flex-direction: row;
@@ -33,13 +33,12 @@
   border: none;
   overflow: hidden;
   outline: none;
-  max-width: 70vw;
+  max-width: 60vw;
   -webkit-box-shadow: none;
   -ms-box-shadow: none;
   box-shadow: none;
   white-space: pre-wrap;
   word-wrap: break-word;
-  font-size: 1em;
 }
 .Converter .number-line .number-container .radix {
   display: table-cell;
@@ -50,19 +49,22 @@
   display: flex;
   flex-direction: row;
   margin: auto 0 auto auto;
+  text-align: center;
 }
 .Converter .number-line .stepButtons button {
+  display: table-cell;
+  vertical-align: middle;
   border: none;
   background-color: #505050;
   font-family: "Cutive Mono", monospace;
   font-weight: 500;
   color: white;
-  border-radius: 60%;
+  border-radius: 50%;
   outline: 0;
-  width: 5vh;
-  height: 5vh;
-  font-size: 4vh;
-  margin: 5px 0 5px 15px;
+  width: 1em;
+  height: 1em;
+  font-size: 0.8em;
+  margin-left: 15px;
 }
 .Converter .number-line .stepButtons button:hover {
   cursor: pointer;

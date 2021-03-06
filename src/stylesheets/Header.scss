@@ -1,6 +1,6 @@
 .Header {
   width      : 100%;
-  font-size  : 6vh;
+  font-size  : 7vmin;
   font-weight: 600;
 
   .MuiAccordion-root {
@@ -31,7 +31,7 @@
         }
 
         #expand-icon {
-          height: 2vh;
+          height: 0.4em;
         }
       }
     }
@@ -39,7 +39,7 @@
     .MuiAccordionDetails-root {
       display       : flex;
       flex-direction: column;
-      font-size     : 0.7em;
+      font-size     : 0.6em;
       padding       : 0;
       margin        : 1vh 5vw 2.5vh 5vw;
 
@@ -74,10 +74,10 @@
         margin     : 2vh 0 0 -0.2em;
 
         button {
-          width        : 5.2vh;
-          height       : 5.2vh;
-          font-size    : 2.7vh;
-          margin       : 5px;
+          width        : 6.5vmin;
+          height       : 6.5vmin;
+          font-size    : 3.5vmin;
+          margin       : 1vmin;
           font-family  : "Cutive Mono", monospace;
           border       : none;
           color        : white;
