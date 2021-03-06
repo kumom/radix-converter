@@ -72,8 +72,8 @@ function NumberContainer(props: {
       }}
       onBlur={event => {
         event.target.style.color = unfocusedColor;
-        if (props.value === "")
-          props.updateValue("0", props.radix);
+        if (event.currentTarget.innerText === "")
+          event.currentTarget.innerText = "0";
       }}
       style={{ color: unfocusedColor }}>
       {props.value}
