@@ -72,8 +72,10 @@ function NumberContainer(props: {
       }}
       onBlur={event => {
         event.target.style.color = unfocusedColor;
-        if (event.currentTarget.innerText === "")
+        if (event.currentTarget.innerText === "") {
+          props.updateValue("0", props.radix);
           event.currentTarget.innerText = "0";
+        }
       }}
       style={{ color: unfocusedColor }}>
       {props.value}
@@ -84,7 +86,7 @@ function NumberContainer(props: {
 
 const NumberContainerMemo = React.memo(NumberContainer, (props, nextProps) => {
   const editing = props.radix === nextProps.currentRadix;
-  const buttonClicked = document.activeElement &&
-    document.activeElement.tagName === "BUTTON";
-  return editing && !buttonClicked;
+  const focused = !document.activeElement ||
+    document.activeElement.classList.contains("number");
+  return editing && focused;
 });
