@@ -97,6 +97,8 @@ function DecimalPlacesSetter(props: { decimalPlaces: number, updateDecimalPlaces
         contentEditable={true}
         suppressContentEditableWarning={true}
         onKeyDown={event => {
+          if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey)
+            event.currentTarget.blur();
           if (event.key === "-" || event.key === "."
             || (event.key !== "Backspace" &&
               event.key !== "ArrowRight" &&

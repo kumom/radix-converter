@@ -31,7 +31,7 @@ export default function Converter(props: {
               style={{ backgroundColor: activeColor(radix) }}
               onMouseDown={event => { event.preventDefault() }}
               onClick={event => {
-                (event.target as HTMLButtonElement).focus();
+                event.currentTarget.focus();
                 const newValue = value.plus(1);
                 props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
               }}>+</button>
@@ -39,7 +39,7 @@ export default function Converter(props: {
               style={{ backgroundColor: activeColor(radix) }}
               onMouseDown={event => { event.preventDefault() }}
               onClick={event => {
-                (event.target as HTMLButtonElement).focus();
+                event.currentTarget.focus();
                 const newValue = value.minus(1);
                 props.updateValue(newValue.toString(props.currentRadix), props.currentRadix);
               }}>-</button>
@@ -85,6 +85,6 @@ function NumberContainer(props: {
 const NumberContainerMemo = React.memo(NumberContainer, (props, nextProps) => {
   const editing = props.radix === nextProps.currentRadix;
   const buttonClicked = document.activeElement &&
-                        document.activeElement.tagName === "BUTTON";
+    document.activeElement.tagName === "BUTTON";
   return editing && !buttonClicked;
 });
