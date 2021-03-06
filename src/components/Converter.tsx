@@ -3,6 +3,8 @@ import BigNumber from "bignumber.js";
 import "../stylesheets/Converter.css";
 import { activeColor } from "../util";
 
+const unfocusedColor = "rgba(10, 10, 10, 0.82)";
+
 export default function Converter(props: {
   currentValue: string
   currentRadix: number,
@@ -22,7 +24,13 @@ export default function Converter(props: {
         const valueStr: string = radix === props.currentRadix ? props.currentValue : value.toString(radix);
 
         return <div key={radix} className="number-line">
-          <span className="equal-sign" style={{ visibility: props.currentRadix === radix ? "hidden" : "visible" }}>=</span>
+          <span className="equal-sign"
+            style={{
+              visibility: props.currentRadix === radix ? "hidden" : "visible",
+              color: unfocusedColor
+            }}>
+            =
+          </span>
           <NumberContainerMemo value={valueStr} radix={radix}
             currentRadix={props.currentRadix}
             updateValue={props.updateValue} />
@@ -55,8 +63,6 @@ function NumberContainer(props: {
   currentRadix: number,
   updateValue: (v: string, radix: number) => void
 }) {
-
-  const unfocusedColor = "rgba(10, 10, 10, 0.82)";
 
   return <div className="number-container">
     <div
