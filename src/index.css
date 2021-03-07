@@ -20,11 +20,16 @@ button {
   line-height                : 0;
   border                     : none;
   border-radius              : 50%;
+  filter                     : none;
 }
 
 
 button:hover {
   cursor: pointer;
+}
+
+button:active {
+  filter: opacity(60%);
 }
 
 *:focus {
