@@ -60,25 +60,16 @@
       text-align    : center;
 
       button {
-        display         : table-cell;
-        vertical-align  : middle;
-        line-height     : 0;
-        border          : none;
         background-color: rgb(80, 80, 80);
         font-family     : "Cutive Mono", monospace;
         font-weight     : 500;
         color           : white;
-        border-radius   : 50%;
-        outline         : 0;
         width           : 1em;
         height          : 1em;
         font-size       : 0.8em;
         margin-left     : 3vmin;
       }
 
-      button:hover {
-        cursor: pointer;
-      }
     }
   }
 }

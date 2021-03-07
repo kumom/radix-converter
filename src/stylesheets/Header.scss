@@ -74,20 +74,13 @@
         margin     : 2vh 0 0 -0.2em;
 
         button {
-          width        : 6.5vmin;
-          height       : 6.5vmin;
-          font-size    : 3.5vmin;
-          line-height  : 0;
-          margin       : 1vmin;
-          font-family  : "Cutive Mono", monospace;
-          border       : none;
-          color        : white;
-          border-radius: 50%;
-          outline      : 0;
-
-          &:hover {
-            cursor: pointer;
-          }
+          width      : 6.5vmin;
+          height     : 6.5vmin;
+          font-size  : 3.5vmin;
+          margin     : 1vmin;
+          font-family: "Cutive Mono", monospace;
+          border     : none;
+          color      : white;
         }
       }
     }

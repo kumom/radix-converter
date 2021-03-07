@@ -3,11 +3,26 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  display                    : table-cell;
+  vertical-align             : middle;
+  -webkit-tap-highlight-color: transparent;
+  outline                    : 0;
+  line-height                : 0;
+  border                     : none;
+  border-radius              : 50%;
+}
+
+
+button:hover {
+  cursor: pointer;
 }

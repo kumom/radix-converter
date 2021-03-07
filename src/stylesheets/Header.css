@@ -68,16 +68,10 @@
   width: 6.5vmin;
   height: 6.5vmin;
   font-size: 3.5vmin;
-  line-height: 0;
   margin: 1vmin;
   font-family: "Cutive Mono", monospace;
   border: none;
   color: white;
-  border-radius: 50%;
-  outline: 0;
-}
-.Header .MuiAccordion-root .MuiAccordionDetails-root #radix-buttons button:hover {
-  cursor: pointer;
 }
 
 /*# sourceMappingURL=Header.css.map */
