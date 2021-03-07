@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/radix-converter/static/css/main.1714bac5.chunk.css",
+    "main.css": "/radix-converter/static/css/main.2473975e.chunk.css",
     "main.js": "/radix-converter/static/js/main.8685a31d.chunk.js",
     "main.js.map": "/radix-converter/static/js/main.8685a31d.chunk.js.map",
     "runtime-main.js": "/radix-converter/static/js/runtime-main.982968eb.js",
@@ -8,14 +8,14 @@
     "static/js/2.f6cb8221.chunk.js": "/radix-converter/static/js/2.f6cb8221.chunk.js",
     "static/js/2.f6cb8221.chunk.js.map": "/radix-converter/static/js/2.f6cb8221.chunk.js.map",
     "index.html": "/radix-converter/index.html",
-    "static/css/main.1714bac5.chunk.css.map": "/radix-converter/static/css/main.1714bac5.chunk.css.map",
+    "static/css/main.2473975e.chunk.css.map": "/radix-converter/static/css/main.2473975e.chunk.css.map",
     "static/js/2.f6cb8221.chunk.js.LICENSE.txt": "/radix-converter/static/js/2.f6cb8221.chunk.js.LICENSE.txt",
     "static/media/expand.574638d6.svg": "/radix-converter/static/media/expand.574638d6.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.982968eb.js",
     "static/js/2.f6cb8221.chunk.js",
-    "static/css/main.1714bac5.chunk.css",
+    "static/css/main.2473975e.chunk.css",
     "static/js/main.8685a31d.chunk.js"
   ]
 }
