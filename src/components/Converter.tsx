@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BigNumber from "bignumber.js";
 import "../stylesheets/Converter.css";
 import { activeColor } from "../util";
@@ -14,11 +14,19 @@ export default function Converter(props: {
 }) {
 
   BigNumber.set({ DECIMAL_PLACES: props.decimalPlaces })
+  const showRadixes = Array(37).fill(null).map((v: any, i: number) => i).filter(radix => radix >= 2 && props.mask[radix]);
+
+  useEffect(() => {
+    if (showRadixes.length && !props.mask[props.currentRadix]) {
+      const newRadix = showRadixes[0];
+      const newVal = new BigNumber(props.currentValue, props.currentRadix);
+      props.updateValue(newVal.toString(newRadix), newRadix);
+    }
+  })
 
   return <div className="Converter">
     {
-      Array(37).fill(null).map((v: any, radix: number) => {
-        if (radix < 2 || !props.mask[radix]) return null;
+      showRadixes.map((radix: number) => {
 
         const value: BigNumber = new BigNumber(props.currentValue, props.currentRadix);
         const valueStr: string = radix === props.currentRadix ? props.currentValue : value.toString(radix);
@@ -34,7 +42,7 @@ export default function Converter(props: {
           <NumberContainerMemo value={valueStr} radix={radix}
             currentRadix={props.currentRadix}
             updateValue={props.updateValue} />
-          <div className="stepButtons" style={{ display: radix === props.currentRadix ? "block" : "none" }}>
+          <div className="stepButtons" style={{ display: props.currentRadix === radix ? "block" : "none" }}>
             <button
               style={{ backgroundColor: activeColor(radix) }}
               onMouseDown={event => { event.preventDefault() }}
