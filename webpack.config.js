@@ -42,28 +42,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        oneOf: [
-          {
-            test: /\.module\.css$/,
-            use: [
-              "style-loader",
-              {
-                loader: "css-loader",
-                options: {
-                  modules: {
-                    mode: "local",
-                    localIdentName: "[name]_[hash:base64:5]--[local]",
-                    exportLocalsConvention: "camelCase",
-                  }
-
-                }
-              },
-            ]
-          },
-          {
-            use: ["style-loader", "css-loader"]
-          }
-        ],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },

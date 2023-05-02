@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "lint": "eslint './src/**' --ext .js,.jsx,.ts,.tsx --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "aws s3 sync dist/ s3://kumom.io/radix-converter/ --exclude '*.DS_Store'",
+    "deploy": "aws s3 sync dist/ s3://kumom.io/radix-converter/ --exclude '*.DS_Store'; aws s3 sync assets/ s3://kumom.io/radix-converter/assets/ --exclude '*.DS_Store'",
     "refresh": "aws cloudfront create-invalidation --distribution-id E26120WQD6YYFN --paths '/*'"
   },
   "eslintConfig": {
