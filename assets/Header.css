@@ -22,12 +22,14 @@
   align-items: center;
 }
 .Header .MuiAccordion-root .MuiAccordionSummary-root .MuiAccordionSummary-content #title #github-logo {
+  content: url(/radix-converter/assets/github.png);
   display: inline-block;
   width: 0.5em;
   height: 0.5em;
   margin: 0 0.1em;
 }
 .Header .MuiAccordion-root .MuiAccordionSummary-root .MuiAccordionSummary-content #expand-icon {
+  content: url(/radix-converter/assets/expand.svg);
   height: 0.4em;
 }
 .Header .MuiAccordion-root .MuiAccordionDetails-root {

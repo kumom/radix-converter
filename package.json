@@ -2,6 +2,17 @@
   "name": "radix-converter",
   "version": "0.1.0",
   "homepage": "https://kumom.github.io/radix-converter",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "lint": "eslint './src/**' --ext .js,.jsx,.ts,.tsx --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "aws s3 sync dist/ s3://kumom.io/radix-converter/ --exclude '*.DS_Store'",
+    "refresh": "aws cloudfront create-invalidation --distribution-id E26120WQD6YYFN --paths '/*'"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "bignumber.js": "^9.0.1",
@@ -9,20 +20,20 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "aws s3 sync build/ s3://kumom.io/radix-converter/ --exclude '*.DS_Store'"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "devDependencies": {
     "@types/react-dom": "^17.0.1",
-    "react-scripts": "^4.0.3",
-    "typescript": "^4.4.3"
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.22.0",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.3.1",
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
+    "typescript": "^4.4.3",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.0"
   },
   "browserslist": {
     "production": [

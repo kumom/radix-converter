@@ -1,27 +1,27 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "./",
+    "target": "es2019",
     "module": "esnext",
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "target": "es6",
     "downlevelIteration": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "experimentalDecorators": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "noFallthroughCasesInSwitch": true,
-    "strict": true
+    "strict": false,
   },
   "include": [
-    "src"
+    "./src",
+    "./assets"
+  ],
+  "exclude": ["node_modules"],
+  "typeRoots": [
+    "./node_modules/@types",
   ]
 }

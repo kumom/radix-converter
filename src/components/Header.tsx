@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
-import "../stylesheets/Header.css";
-import expandedIcon from "../assets/expand.svg";
-import githubLogo from "../assets/github.png";
+// import "../stylesheets/Header.css";
 import { activeColor } from "../util";
 
 export default function Header(props: {
@@ -37,7 +35,7 @@ export default function Header(props: {
           tabIndex={-1}
         >
           <Title expanded={expanded} />
-          <img id="expand-icon" src={expandedIcon} alt="expand"
+          <img id="expand-icon" alt="expand"
             style={{
               filter: expanded ? "invert(80%)" : "none",
               transform: expanded ? "rotate(180deg)" : "none"
@@ -75,7 +73,7 @@ function Title(props: { expanded: boolean }) {
         >
           <img
             key="github"
-            src={githubLogo}
+            
             alt="github-logo"
             id="github-logo"
             style={{ filter: props.expanded ? "invert(80%)" : "none" }}

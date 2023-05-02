@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import BigNumber from "bignumber.js";
-import "../stylesheets/Converter.css";
+// import "../stylesheets/Converter.css";
 import { activeColor } from "../util";
 
 const unfocusedColor = "rgba(10, 10, 10, 0.82)";
@@ -90,6 +90,21 @@ function NumberContainer(props: {
         if (event.currentTarget.innerText === "") {
           props.updateValue("0", props.radix);
           event.currentTarget.innerText = "0";
+        }
+      }}
+      onPaste={event => {
+        const input = event.clipboardData.getData("text/plain");
+
+        event.clipboardData.setData('text/plain', input);
+        event.clipboardData.setData('text/html', input);
+        // @ts-ignore
+        event.target.innerHTML = input;
+        event.preventDefault();
+
+        if (input.split('').every(ch => Number(ch) && Number(ch) < props.radix)) {
+          props.updateValue(input, props.radix);
+        } else {
+          props.updateValue("NaN", props.radix);
         }
       }}
       style={{ color: unfocusedColor }}>
